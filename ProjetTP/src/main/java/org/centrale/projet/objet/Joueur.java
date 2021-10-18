@@ -15,9 +15,9 @@ public class Joueur {
      * Personnage du joueur.
      */
     private Personnage perso;
-    
-    public Personnage getPerso() {
-        return perso;
+
+    public Joueur(Personnage perso){
+        this.perso = perso;
     }
     
     /**
@@ -63,6 +63,9 @@ public class Joueur {
         
     }
     
+    public Personnage getPerso() {
+        return perso;
+    }
     
     
 }

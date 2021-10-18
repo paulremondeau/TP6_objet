@@ -22,18 +22,16 @@ public class Archer extends Personnage implements Combattant{
      * @param pV Point de vie
      * @param pA Pourcentage d'attaque
      * @param pP Pourcentage de parade
-     * @param pM Pourcentage de magie
      * @param rM Pourcentage de résistance magique
      * @param dA Dégats d'attaque
-     * @param dM Dégats magique
      * @param distMax Distance maximale d'attaque 
      * @param pos Positon de l'archer
      * @param nbF Nombre de flèches de l'archer
      * @param ptPara Point de parade.
      * @param vivant Dit si l'archer est vivant.
      */
-    public Archer(String nom, int pV, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, Point2D pos, int  nbF, int ptPara,boolean vivant) {
-        super(nom, pV, 0, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara,vivant);   // On sous-entend que l'archer a 0 points de mana
+    public Archer(String nom, int pV, int pA, int pP,  int rM, int dA, int distMax, Point2D pos, int nbF, int ptPara,boolean vivant) {
+        super(nom, pV, 0, pA, pP, 0, rM, dA, 0, distMax, pos, ptPara,vivant);   // On sous-entend que l'archer a 0 points de mana
         this.nbFleches = nbF;
     }
     

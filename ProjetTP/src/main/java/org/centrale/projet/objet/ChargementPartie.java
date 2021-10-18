@@ -157,10 +157,72 @@ public class ChargementPartie {
                 Voleur unVoleur = new Voleur(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
                 monde.listeCreatures.add(unVoleur);
             }
-            
+            case "Archer" -> {
+                String nom = ligneListe.get(1);
+                int pV = Integer.parseInt(ligneListe.get(2));
+                int pA = Integer.parseInt(ligneListe.get(4));
+                int pP = Integer.parseInt(ligneListe.get(5));
+                int rM = Integer.parseInt(ligneListe.get(7));
+                int dA = Integer.parseInt(ligneListe.get(8));
+                int distMax = Integer.parseInt(ligneListe.get(10));
+                int ptPara = Integer.parseInt(ligneListe.get(11));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                
+                // On donne 32 flèches quand on charge la partie
+                Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, 32, ptPara, true);  
+                monde.listeCreatures.add(unArcher);
+            }
+            case "Paysan" -> {
+                String nom = ligneListe.get(1);
+                int pV = Integer.parseInt(ligneListe.get(2));
+                int pP = Integer.parseInt(ligneListe.get(5));
+                int distMax = Integer.parseInt(ligneListe.get(10));
+                int ptPara = Integer.parseInt(ligneListe.get(11));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                 
+                Paysan unPaysan = new Paysan(nom, pV, pP, distMax, pos, ptPara, true);
+                monde.listeCreatures.add(unPaysan);
+            }
+            case "Joueur" -> {
+                String nom = ligneListe.get(2);
+                int pV = Integer.parseInt(ligneListe.get(3));
+                int ptM = Integer.parseInt(ligneListe.get(4));
+                int pA = Integer.parseInt(ligneListe.get(5));
+                int pP = Integer.parseInt(ligneListe.get(6));
+                int pM = Integer.parseInt(ligneListe.get(7));
+                int rM = Integer.parseInt(ligneListe.get(8));
+                int dA = Integer.parseInt(ligneListe.get(9));
+                int dM = Integer.parseInt(ligneListe.get(10));
+                int distMax = Integer.parseInt(ligneListe.get(11));
+                int ptPara = Integer.parseInt(ligneListe.get(12));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
+                Joueur leJoueur = null;
+                
+                switch(ligneListe.get(1)){
+                    case "Guerrier" -> {
+                        Guerrier unGuerrier = new Guerrier(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
+                        leJoueur = new Joueur(unGuerrier);
+                    }
+                    case "Mage" -> {
+                        Mage unMage = new Mage(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara, true);
+                        leJoueur = new Joueur(unMage);
+                    }
+                    case "Voleur" -> {
+                        Voleur unVoleur = new Voleur(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
+                        leJoueur = new Joueur(unVoleur);
+                    }
+                    case "Archer" -> {
+                        Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, 32, ptPara, true);
+                        leJoueur = new Joueur(unArcher);
+                    }
+                    case "Paysan" -> {
+                        Paysan unPaysan = new Paysan(nom, pV, pP, distMax, pos, ptPara, true);
+                        leJoueur = new Joueur(unPaysan);
+                    }
+                }
+                monde.listeJoueurs.add(leJoueur);
+            }
         }
-        
-        
     }
     
     /**
