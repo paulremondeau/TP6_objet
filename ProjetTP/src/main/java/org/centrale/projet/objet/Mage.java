@@ -19,9 +19,11 @@ public class Mage extends Personnage implements Combattant{
      * @param nom Nom du mage
      * @param pV Points de vie.
      * @param ptM Points de magie.
+     * @param pA Pourcentage d'attaque.
      * @param pP Pourcentage de parade.
      * @param pM Pourcentage de magie.
      * @param rM Résistance magique.
+     * @param dA Dégat d'attaque.
      * @param dM Dégat magique.
      * @param distMax Distance d'attaque maximale.
      * @param pos Position du mage.
@@ -29,8 +31,8 @@ public class Mage extends Personnage implements Combattant{
      * @param vivant Dit si le mage est vivant.
      */
 
-    public Mage(String nom, int pV, int ptM, int pP, int pM, int rM,  int dM, int distMax, Point2D pos, int ptPara,boolean vivant) {
-        super(nom, pV, ptM, 0, pP, pM, rM, 0, dM, distMax, pos, ptPara,vivant);
+    public Mage(String nom, int pV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, Point2D pos, int ptPara,boolean vivant) {
+        super(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara,vivant);
     }
 
     

@@ -9,23 +9,56 @@ package org.centrale.projet.objet;
  * La classe du nuage toxique
  * @author remondeau
  */
-public class NuageToxique extends Object implements Deplacable, Combattant {
+public class NuageToxique extends Objet implements Deplacable, Combattant {
 
-    Point2D pos;
-
+    private int pourcentageAtt;
+    private int pourcentagePar;
+    private int degAtt;
+    private int ptPar;
+    
     public NuageToxique(Point2D pos) {
-        this.pos = pos;
+        super(pos);
     }
 
-    public Point2D getPos() {
-        return pos;
+    public NuageToxique(Point2D pos, int pourcentageAtt, int pourcentagePar, int degAtt, int ptPar) {
+        super(pos);
+        this.pourcentageAtt = pourcentageAtt;
+        this.pourcentagePar = pourcentagePar;
+        this.degAtt = degAtt;
+        this.ptPar = ptPar;
     }
 
-    public void setPos(Point2D pos) {
-        this.pos = pos;
+    public int getPourcentageAtt() {
+        return pourcentageAtt;
     }
-    
-    
+
+    public int getPourcentagePar() {
+        return pourcentagePar;
+    }
+
+    public int getDegAtt() {
+        return degAtt;
+    }
+
+    public int getPtPar() {
+        return ptPar;
+    }
+
+    public void setPourcentageAtt(int pourcentageAtt) {
+        this.pourcentageAtt = pourcentageAtt;
+    }
+
+    public void setPourcentagePar(int pourcentagePar) {
+        this.pourcentagePar = pourcentagePar;
+    }
+
+    public void setDegAtt(int degAtt) {
+        this.degAtt = degAtt;
+    }
+
+    public void setPtPar(int ptPar) {
+        this.ptPar = ptPar;
+    }
 
     @Override
     public void combattre(Creature c) {
@@ -39,7 +72,7 @@ public class NuageToxique extends Object implements Deplacable, Combattant {
             System.out.println("Déplacement non valide");
         }
         else{
-            this.pos.translate(x,y);
+            this.getPos().translate(x,y);
         }
     }
     

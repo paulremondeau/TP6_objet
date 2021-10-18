@@ -105,9 +105,43 @@ public class ChargementPartie {
                 monde.listeObjets.add(unePotionMana);
             }
             case "NuageToxique" -> {
+                int pourcentageAtt = Integer.parseInt(ligneListe.get(1));
+                int pourcentagePar = Integer.parseInt(ligneListe.get(2));
+                int degAtt = Integer.parseInt(ligneListe.get(3));
+                int ptPar = Integer.parseInt(ligneListe.get(4));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(5)), Integer.parseInt(ligneListe.get(6)));
                 
+                NuageToxique unNuageToxique = new NuageToxique(pos, pourcentageAtt, pourcentagePar, degAtt, ptPar);
+                monde.listeObjets.add(unNuageToxique);
             }
-            
+            case "Guerrier" -> {
+                String nom = ligneListe.get(1);
+                int pV = Integer.parseInt(ligneListe.get(2));
+                int pA = Integer.parseInt(ligneListe.get(4));
+                int pP = Integer.parseInt(ligneListe.get(5));
+                int rM = Integer.parseInt(ligneListe.get(7));
+                int dA = Integer.parseInt(ligneListe.get(8));
+                int ptPara = Integer.parseInt(ligneListe.get(11));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                 
+                Guerrier unGuerrier = new Guerrier(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
+                monde.listeCreatures.add(unGuerrier);
+            }
+            case "Mage" -> {
+                String nom = ligneListe.get(1);
+                int pV = Integer.parseInt(ligneListe.get(2));
+                int ptM = Integer.parseInt(ligneListe.get(3));
+                int pA = Integer.parseInt(ligneListe.get(4));
+                int pP = Integer.parseInt(ligneListe.get(5));
+                
+                int rM = Integer.parseInt(ligneListe.get(7));
+                int dA = Integer.parseInt(ligneListe.get(8));
+                int ptPara = Integer.parseInt(ligneListe.get(11));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                 
+                Mage unmage = new Mage(nom, pV, ptM, pP, pM, rM, dM, distMax, pos, ptPara, vivant);
+                monde.listeCreatures.add(unmage);
+            }
         }
         
         

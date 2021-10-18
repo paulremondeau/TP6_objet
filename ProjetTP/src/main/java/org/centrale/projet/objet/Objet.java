@@ -15,7 +15,6 @@ public abstract class Objet extends ElementDeJeu {
 
     /**
      * Constructeur d'un objet
-     * @param nom Nom de l'objet.
      * @param pos Position de l'objet.
      */
     public Objet(Point2D pos) {
