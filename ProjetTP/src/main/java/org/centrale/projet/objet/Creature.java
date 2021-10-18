@@ -52,6 +52,17 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
         this.ptPar=c.ptPar;
         this.vivant = c.vivant;
     }
+    
+    
+    /**
+     * Constructeur servant dans la création  d'un Joueur
+     * @param pos
+     * @param vivant 
+     */
+    public Creature(Point2D pos, boolean vivant){
+        this.pos = pos;
+        this.vivant = vivant;
+    }
 
     /**
      * Construit une créature avec les valeurs par défaut.
@@ -59,6 +70,8 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     public Creature() {
         this.pos=new Point2D(); // les autres attributs sont initialisés à 0, ce sont des entiers
     }
+    
+    
 
     public int getPtVie() {
         return ptVie;

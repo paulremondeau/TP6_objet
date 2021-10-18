@@ -16,7 +16,7 @@ public class TestSeance5 {
         World monde = new World();
         monde.creeMondeAlea();
         
-        Joueur moi = new Joueur(monde.listeCreatures);
+        Joueur moi = monde.creeJoueurAlea();
         System.out.println("Affichons le personnage du joueur :\n");
         moi.getPerso().affiche();
         

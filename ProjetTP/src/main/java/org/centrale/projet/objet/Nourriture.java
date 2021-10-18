@@ -20,10 +20,9 @@ public abstract class Nourriture extends Object {
      * @param carac la caractéristique qui sera modifiée
      * @param puissance la valeur du bonus/valus que procure la nourriture
      */
-    public Nourriture(int puissance,int duree,String carac) {
+    public Nourriture(int puissance,int duree) {
         this.puissance = puissance;
         this.duree = duree;
-        this.carac = carac;
     }
     
     public void utiliser(Personnage p){

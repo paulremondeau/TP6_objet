@@ -5,6 +5,8 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Classe des paysans. Sous-classe des personnages.
  * @author bodet
@@ -28,6 +30,27 @@ public class Paysan extends Personnage {
     public Paysan(String nom, int pV, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, Point2D pos, int ptPara,boolean vivant){
         super(nom, pV, 0, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara,vivant);  // On sous-entend que le paysan a 0 points de mana
     }
+    
+    /**
+     * Constructeur aléatoire utilisé dans la classe Joueur
+     * @param nom
+     * @param pos
+     * @param vivant 
+     */
+    public Paysan(String nom,Point2D pos, boolean vivant){
+        super(nom,pos,vivant);
+    
+        this.setPtVie(ThreadLocalRandom.current().nextInt(10,30));
+        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(5,10));
+        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(1,5));
+        this.setPourcentageMag(ThreadLocalRandom.current().nextInt(1,5));
+        this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(10,30));
+        this.setDegAtt(ThreadLocalRandom.current().nextInt(1,5));
+        this.setDegMag(ThreadLocalRandom.current().nextInt(1,5));
+        this.setDistAttMax(ThreadLocalRandom.current().nextInt(3,6));
+        this.setPtPar(ThreadLocalRandom.current().nextInt(20,30));    
+    }
+        
     
     /**
      * Constructeur de recopie.

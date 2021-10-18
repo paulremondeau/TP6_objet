@@ -17,7 +17,6 @@ public class MalusDegAtt extends Nourriture{
     public MalusDegAtt(int puissance, int duree) {
         super(puissance, duree);
     }
-    
-    
-    
+
+
 }

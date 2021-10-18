@@ -6,6 +6,7 @@
 package org.centrale.projet.objet;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * La classe des mages.
@@ -39,6 +40,25 @@ public class Mage extends Personnage implements Combattant{
      */
     public Mage(Mage m) {
         super(m);
+    }
+    
+    /**
+     * Constructeur aléatoire utilisé dans la classe Joueur
+     * @param nom
+     * @param pos
+     * @param vivant 
+     */
+    public Mage(String nom,Point2D pos, boolean vivant){
+        super(nom,pos,vivant);
+    
+        this.setPtVie(ThreadLocalRandom.current().nextInt(25,30));
+        this.setPtMana(ThreadLocalRandom.current().nextInt(70,80));
+        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(10,15));
+        this.setPourcentageMag(ThreadLocalRandom.current().nextInt(50,65));
+        this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(70,80));
+        this.setDegMag(ThreadLocalRandom.current().nextInt(60,70));
+        this.setDistAttMax(ThreadLocalRandom.current().nextInt(10,15));
+        this.setPtPar(ThreadLocalRandom.current().nextInt(20,30));    
     }
     
     /**

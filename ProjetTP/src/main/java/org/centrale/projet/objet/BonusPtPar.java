@@ -9,13 +9,13 @@ package org.centrale.projet.objet;
  *
  * @author remondeau
  */
-public class BonusPtPar extends Nourriture{
-       
+public class BonusPtPar extends Nourriture{ 
+    
+    private static String carac = "ptPar";
+    
     public BonusPtPar(int puissance,int duree){
         super(puissance,duree);
     }
     
-    public void utiliser(Personnage p){
-        p.listeNourriture.add(this);
-    }
+    
 }

@@ -7,7 +7,6 @@ package org.centrale.projet.objet;
 
 import java.util.ArrayList;
 import java.util.Random;
-import static org.centrale.projet.objet.World.TAILLE;
 
 
 /**
@@ -45,31 +44,6 @@ public class Point2D {
         this.x = p.x;
         this.y = p.y;
     }
-    
-    /**
-     * Crée une position aléatoire dans le monde, différente des positions des créatures en paramètre.
-     * @param liste Liste des créatures avec des positions.
-     */
-    public Point2D(ArrayList<Creature> liste){
-        Random generateurAleatoire = new Random();
-        boolean estDifferente=false;
-        boolean estLibre;
-        while (estDifferente!=true){
-            this.x=generateurAleatoire.nextInt(TAILLE);
-            this.y=generateurAleatoire.nextInt(TAILLE);
-            estLibre=true;
-            for (Creature o : liste){
-                if (o.getPos().equals(new Point2D(this.x,this.y))){
-                    estLibre=false;
-                    break;
-                }
-            }
-            if (estLibre){ // Sort de la boucle while si on a trouvé une position acceptable
-                estDifferente=true;
-            }
-        }
-    }
-    
     
     public void setX(int value){
         this.x = value;

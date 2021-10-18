@@ -8,6 +8,7 @@ package org.centrale.projet.objet;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Classe des archers, sous-classe des personnages.
@@ -132,6 +133,26 @@ public class Archer extends Personnage implements Combattant{
         this.setPos(pos);
     }
     
+    /**
+     * Constructeur aléatoire utilisé dans la classe Joueur
+     * @param nom
+     * @param pos
+     * @param vivant 
+     */
+    public Archer(String nom,Point2D pos, boolean vivant){
+        super(nom,pos,vivant);
+    
+        this.nbFleches = ThreadLocalRandom.current().nextInt(20,30);
+        this.setPtVie(ThreadLocalRandom.current().nextInt(40,50));
+        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(30,40));
+        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(20,30));
+        this.setPourcentageMag(ThreadLocalRandom.current().nextInt(10,20));
+        this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(30,35));
+        this.setDegAtt(ThreadLocalRandom.current().nextInt(15,25));
+        this.setDegMag(ThreadLocalRandom.current().nextInt(1,5));
+        this.setDistAttMax(ThreadLocalRandom.current().nextInt(20,30));
+        this.setPtPar(ThreadLocalRandom.current().nextInt(20,30));    
+    }
     
     /**
      * Constructeur de recopie.

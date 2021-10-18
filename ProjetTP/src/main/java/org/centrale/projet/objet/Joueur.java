@@ -23,10 +23,10 @@ public class Joueur {
     }
     
     /**
-     * Constructeur du personnage
-     * @param listeCreatures Liste de créatures qui doivent avoir des positions différentes.
+     * Constructeur du joueur
+     * @param pos Position du joueur à la création de son personnage.
      */
-    public Joueur(ArrayList<Creature> listeCreatures){
+    public Joueur(Point2D pos){
         
         String classe;
         
@@ -42,70 +42,23 @@ public class Joueur {
         
         System.out.println("\nC'est noté. Génération de votre personnage...");
         
-        int pV;
-        int pA;
-        int pP;
-        int pM;
-        int rM;
-        int dA;
-        int dM;
-        int distMax;
-        Point2D pos = new Point2D(listeCreatures);  // Génère une position non utilisée
-        int ptPara;
         boolean vivant = true;
         
         switch(classe){  // On génère des valeurs différentes selon la classe
-   
             case "Paysan": 
-                pV = ThreadLocalRandom.current().nextInt(10,30);
-                pA = ThreadLocalRandom.current().nextInt(5,10);
-                pP = ThreadLocalRandom.current().nextInt(1,5);
-                pM = ThreadLocalRandom.current().nextInt(1,5);
-                rM = ThreadLocalRandom.current().nextInt(10,30);
-                dA = ThreadLocalRandom.current().nextInt(1,5);
-                dM = ThreadLocalRandom.current().nextInt(1,5);
-                distMax = ThreadLocalRandom.current().nextInt(3,6);
-                ptPara = ThreadLocalRandom.current().nextInt(20,30);
-
-                perso = new Paysan(nom,pV,pA,pP,pM,rM,dA,dM,distMax,pos,ptPara,vivant);
+                perso = new Paysan(nom,pos,vivant);
                 break;
-
             case "Archer":
-                int nbF = ThreadLocalRandom.current().nextInt(20,30);
-                pV = ThreadLocalRandom.current().nextInt(40,50);
-                pA = ThreadLocalRandom.current().nextInt(30,40);
-                pP = ThreadLocalRandom.current().nextInt(20,30);
-                pM = ThreadLocalRandom.current().nextInt(10,20);
-                rM = ThreadLocalRandom.current().nextInt(30,35);
-                dA = ThreadLocalRandom.current().nextInt(15,25);
-                dM = ThreadLocalRandom.current().nextInt(1,5);
-                distMax = ThreadLocalRandom.current().nextInt(20,30);
-                ptPara = ThreadLocalRandom.current().nextInt(20,30);
-                perso = new Archer(nom,pV,pA,pP,pM,rM,dA,dM,distMax,pos,nbF,ptPara,vivant);
+                perso = new Archer(nom,pos,vivant);
                 break;
-
             case "Guerrier":
-                pV = ThreadLocalRandom.current().nextInt(80,100);
-                pA = ThreadLocalRandom.current().nextInt(70,80);
-                pP = ThreadLocalRandom.current().nextInt(60,70);
-                rM = ThreadLocalRandom.current().nextInt(60,70);
-                dA = ThreadLocalRandom.current().nextInt(60,70);
-                ptPara = ThreadLocalRandom.current().nextInt(60,70);
-                perso = new Guerrier(nom,pV,pA,pP,rM,dA,pos,ptPara,vivant);
+                perso = new Guerrier(nom,pos,vivant);
                 break;
-
             case "Mage": 
-            default:
-                pV = ThreadLocalRandom.current().nextInt(25,30);
-                int ptM = ThreadLocalRandom.current().nextInt(70,80);
-                pP = ThreadLocalRandom.current().nextInt(10,15);
-                pM = ThreadLocalRandom.current().nextInt(50,65);
-                rM = ThreadLocalRandom.current().nextInt(70,80);
-                dM = ThreadLocalRandom.current().nextInt(60,70);
-                distMax = ThreadLocalRandom.current().nextInt(10,15);
-                ptPara = ThreadLocalRandom.current().nextInt(20,30);
-                perso = new Mage(nom,pV,ptM,pP,pM,rM,dM,distMax,pos,ptPara,vivant);
+                perso = new Mage(nom,pos,vivant);
                 break;
+            default:
+                
          }
         
        System.out.println("\n"+nom+" est créé !");

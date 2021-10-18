@@ -6,6 +6,7 @@
 package org.centrale.projet.objet;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Classe des guerriers. Sous-classe de Personnage.
@@ -46,6 +47,23 @@ public class Guerrier extends Personnage implements Combattant{
     public Guerrier() {
     }
 
+    /**
+     * Constructeur aléatoire utilisé dans la classe Joueur
+     * @param nom
+     * @param pos
+     * @param vivant 
+     */
+    public Guerrier(String nom,Point2D pos, boolean vivant){
+        super(nom,pos,vivant);
+    
+        this.setPtVie(ThreadLocalRandom.current().nextInt(80,100));
+        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(70,80));
+        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(60,70));
+        this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(60,70));
+        this.setDegAtt(ThreadLocalRandom.current().nextInt(60,70));
+        this.setPtPar(ThreadLocalRandom.current().nextInt(60,70));    
+    }
+    
     /**
      * Méthode combatre du guerrier
      *

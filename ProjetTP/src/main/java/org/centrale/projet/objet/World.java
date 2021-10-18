@@ -21,7 +21,7 @@ public class World {
     /**
      * Taille du monde.
      */
-    public final static int TAILLE = 100;
+    private int TAILLE = 100;
 
     /**
      * Liste de créatures contrôlées automatiquement
@@ -41,6 +41,7 @@ public class World {
     public World() {
 
     }
+
     /**
      * Implémente les tours de jeu.
      */
@@ -75,7 +76,6 @@ public class World {
                     break;
 
             }
-
         }
         System.out.println("Fin du tour de jeu !");
     }
@@ -103,7 +103,7 @@ public class World {
             pP = ThreadLocalRandom.current().nextInt(0, 1);
             dA = ThreadLocalRandom.current().nextInt(1, 3);
             ptPara = ThreadLocalRandom.current().nextInt(5, 15);
-            pos = new Point2D(listeCreatures);
+            pos = creerPoint2DAlea();
             unLoup = new Loup(pV, pA, pP, dA, pos, ptPara, true);
             listeCreatures.add(unLoup);
             break;
@@ -124,5 +124,43 @@ public class World {
             popomana = new Mana("Popo de mana", pos, ThreadLocalRandom.current().nextInt(10, 15));
             listeObjets.add(popomana);
         }
+    }
+
+    /**
+     * Crée un joueur aléatoirement dans le monde.
+     */
+    public Joueur creeJoueurAlea() {
+
+        Point2D pos = creerPoint2DAlea();
+        
+        Joueur joueur = new Joueur(pos);
+        listeJoueurs.add(joueur);
+        return joueur;
+    }
+    /**
+     * Créer un point2d aléatoirement dans le monde.
+     * @return 
+     */
+    public Point2D creerPoint2DAlea(){
+        Random generateurAleatoire = new Random();
+        int x;
+        int y;
+        Point2D pos;
+        boolean estLibre;
+
+        do {
+            estLibre = true;
+            x = generateurAleatoire.nextInt(TAILLE);
+            y = generateurAleatoire.nextInt(TAILLE);
+            pos = new Point2D(x, y);
+            for (Creature o : listeCreatures) {
+                if (o.getPos().equals(pos)) {
+                    estLibre = false;
+                    break;
+                }
+            }
+        } while (estLibre);
+        
+        return pos;
     }
 }
