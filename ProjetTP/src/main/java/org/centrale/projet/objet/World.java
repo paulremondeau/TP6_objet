@@ -47,14 +47,42 @@ public class World {
      */
     public void tourDeJeu() {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Un nouveau tour commence !");
+        System.out.println("Un nouveau tour commence !"); // Début du tour
+        
+        for (Joueur joueur : listeJoueurs) { // On vérifie si les buff de nourritures sont terminés
+
+                Personnage perso = joueur.getPerso();
+                for (Nourriture nourriture : perso.getListeNourriture()){
+                    int duree = nourriture.getDuree();
+                    
+                    if (duree<0){
+                        nourriture.fin(perso);
+                    } else {
+                        nourriture.setDuree(nourriture.getDuree()-1);
+                    }
+                }
+
+                perso.getListeNourriture().removeIf(n -> n.getDuree()<0); // retire toutes les nourritures dont la durée est écoulée
+            }
+        
         for (Joueur joueur : listeJoueurs) {
+            
+            Personnage perso = joueur.getPerso();
+            Class classePerso = joueur.getPerso().getClass();
+            
 
             System.out.println("C'est votre tour " + joueur.getPerso().getNom() + " !\nVous êtes en " + joueur.getPerso().getPos() + "Que voulez-vous faire ?");
             String action;
-            do {
+            
+            if (classePerso.getSimpleName()=="Paysan"){
+                action = "Déplacer";
+            } else{
+                do {
                 action = keyboard.nextLine();
-            } while (!action.equals("Combattre") && !action.equals("Déplacer") && !action.equals("Rien"));
+                } while (!action.equals("Combattre") && !action.equals("Déplacer") && !action.equals("Rien"));
+            }   
+           
+            
 
             switch (action) {
                 case "Combattre":
@@ -65,9 +93,15 @@ public class World {
 
                 case "Deplacer":
                     System.out.println("Veuillez vous déplacer.");
-                    int dx = keyboard.nextInt();
-                    int dy = keyboard.nextInt();
-
+                    int dx;
+                    int dy;
+                    Point2D destination = new Point2D();
+                    do{
+                        dx = keyboard.nextInt();
+                        dy = keyboard.nextInt();
+                        destination.setPosition(destination.getX()+dx,destination.getY()+dy);
+                    } while(verifierPos(destination));
+                    
                     joueur.getPerso().deplacer(dx, dy);
                     break;
 
@@ -77,6 +111,11 @@ public class World {
 
             }
         }
+        
+        for (Creature c : listeCreatures){
+            
+        }
+        
         System.out.println("Fin du tour de jeu !");
     }
 
@@ -148,19 +187,32 @@ public class World {
         Point2D pos;
         boolean estLibre;
 
+
         do {
             estLibre = true;
             x = generateurAleatoire.nextInt(TAILLE);
             y = generateurAleatoire.nextInt(TAILLE);
             pos = new Point2D(x, y);
-            for (Creature o : listeCreatures) {
+            estLibre = verifierPos(pos);
+            
+        } while (estLibre);
+        
+        return pos;
+    }
+    
+    /**
+     * Vérifie si une position est libre.
+     * @param pos La position en question
+     * @return true si la position n'est pas occupée
+     */
+    public boolean verifierPos(Point2D pos){
+        boolean estLibre = true;
+        for (Creature o : listeCreatures) {
                 if (o.getPos().equals(pos)) {
                     estLibre = false;
                     break;
                 }
-            }
-        } while (estLibre);
-        
-        return pos;
+        }
+        return estLibre;
     }
 }

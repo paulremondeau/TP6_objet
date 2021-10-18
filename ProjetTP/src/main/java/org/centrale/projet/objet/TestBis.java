@@ -12,6 +12,9 @@ package org.centrale.projet.objet;
 public class TestBis {
     public static void main(String[] args) {
         
+        Archer aaa = new Archer();
+        System.out.println(aaa.getClass().getSimpleName());
+        
         //Joueur moi = new Joueur(100, listeCreature);
         //System.out.println("Affichons le personnage du joueur :\n");
         //moi.getPerso().affiche();

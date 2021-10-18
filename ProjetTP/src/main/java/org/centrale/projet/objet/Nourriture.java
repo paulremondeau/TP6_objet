@@ -13,7 +13,6 @@ public abstract class Nourriture extends Object {
     
     private int puissance;
     private int duree;
-    private String carac;
     
     /**
      * 
@@ -27,6 +26,20 @@ public abstract class Nourriture extends Object {
     
     public void utiliser(Personnage p){
         p.getListeNourriture().add(this);
+    }
+    
+    public abstract void fin(Personnage p);
+
+    public int getPuissance() {
+        return puissance;
+    }
+
+    public int getDuree() {
+        return duree;
+    }
+
+    public void setDuree(int duree) {
+        this.duree = duree;
     }
     
     

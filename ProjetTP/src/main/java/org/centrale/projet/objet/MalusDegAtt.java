@@ -11,11 +11,20 @@ package org.centrale.projet.objet;
  */
 public class MalusDegAtt extends Nourriture{
     
-    private static String carac = "degAtt";
     
-
     public MalusDegAtt(int puissance, int duree) {
         super(puissance, duree);
+    }
+    
+    @Override
+    public void utiliser(Personnage p){
+        super.utiliser(p);
+        p.setPtPar(p.getDegAtt()-this.getPuissance());
+    }
+
+    @Override
+    public void fin(Personnage p) {
+        p.setPtPar(p.getDegAtt()+this.getPuissance());
     }
 
 
