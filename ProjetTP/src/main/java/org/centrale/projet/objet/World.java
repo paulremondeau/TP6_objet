@@ -76,7 +76,7 @@ public class World {
             Class classePerso = joueur.getPerso().getClass();
             
 
-            System.out.println("C'est votre tour " + joueur.getPerso().getNom() + " !\nVous êtes en " + joueur.getPerso().getPos() + "Que voulez-vous faire ?");
+            System.out.println("C'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + "Que voulez-vous faire ?");
             String action;
             
             if (classePerso.getSimpleName()=="Paysan"){
@@ -93,21 +93,22 @@ public class World {
                 case "Combattre":
                     System.out.println("Indiquez le numero de la cible à attaquer.\nListe des creatures : " + Arrays.toString(listeCreatures.toArray()));
                     int numeroCible = keyboard.nextInt();
-                    //joueur.getPerso().combattre(listeCreatures[numeroCible]);
+                    Creature cible = listeCreatures.get(numeroCible);
+                    //((classePerso)perso).combattre(cible);
                     break;
 
                 case "Deplacer":
                     System.out.println("Veuillez vous déplacer.");
                     int dx;
                     int dy;
-                    Point2D destination = new Point2D();
+                    Point2D destination = new Point2D(perso.getPos());
                     do{
                         dx = keyboard.nextInt();
                         dy = keyboard.nextInt();
                         destination.setPosition(destination.getX()+dx,destination.getY()+dy);
                     } while(verifierPos(destination));
                     
-                    joueur.getPerso().deplacer(dx, dy);
+                    perso.deplacer(dx, dy);
                     break;
 
                 case "Rien":
