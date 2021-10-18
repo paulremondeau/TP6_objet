@@ -23,13 +23,16 @@ public class ChargementPartie {
     protected String source;
     protected BufferedReader fichier;
     
-    
+    /**
+     * Constructeur du chargement de la partie
+     * @param nomFichier Nom du fichier à charger.
+     */
     public ChargementPartie(String nomFichier){
         this.source=nomFichier;
     }
     
     /**
-     * 
+     * Méthode pour charger un monde depuis la source.
      * @return Le monde qui a été créé.
      * @throws FileNotFoundException Le fichier n'existe pas.
      * @throws IOException Erreur de lecture.
@@ -46,9 +49,10 @@ public class ChargementPartie {
         }
         
         ligne = this.fichier.readLine();
+        // Parcours des lignes
         while (ligne != null) {
-            ligneListe = ligneAListe(ligne);
-            creerElementJeu(ligneListe, mondeCharge);
+            ligneListe = ligneAListe(ligne); // Transforme la ligne en liste
+            creerElementJeu(ligneListe, mondeCharge); // Ajoute l'élément de jeu
             ligne = this.fichier.readLine();
         }
         fichier.close();
@@ -62,7 +66,7 @@ public class ChargementPartie {
      * @param monde Monde à modifier.
      */
     public void creerElementJeu(ArrayList<String> ligneListe, World monde){
-        
+        // Switch sur le premier mot --> classe de l'element de jeu
         switch(ligneListe.get(0)){
             case "Largeur" -> {
                 int i = Integer.parseInt(ligneListe.get(1));
@@ -198,6 +202,7 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
                 Joueur leJoueur = null;
                 
+                // Switch sur la classe du personnage du joueur
                 switch(ligneListe.get(1)){
                     case "Guerrier" -> {
                         Guerrier unGuerrier = new Guerrier(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
