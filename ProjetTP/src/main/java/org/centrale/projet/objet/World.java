@@ -44,7 +44,9 @@ public class World {
     public ArrayList<Objet> listeObjets;
 
     public World() {
-
+        this.listeCreatures = new ArrayList<>();
+        this.listeJoueurs = new ArrayList<>();
+        this.listeObjets = new ArrayList<>();
     }
 
     /**
@@ -54,7 +56,7 @@ public class World {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Un nouveau tour commence !"); // Début du tour
         
-        for (Joueur joueur : listeJoueurs) { // On vérifie si les buff de nourritures sont terminés
+        for (Joueur joueur : this.listeJoueurs) { // On vérifie si les buff de nourritures sont terminés
 
                 Personnage perso = joueur.getPerso();
                 for (Nourriture nourriture : perso.getListeNourriture()){
@@ -70,7 +72,7 @@ public class World {
                 perso.getListeNourriture().removeIf(n -> n.getDuree()<0); // retire toutes les nourritures dont la durée est écoulée
             }
         
-        for (Joueur joueur : listeJoueurs) {
+        for (Joueur joueur : this.listeJoueurs) {
             
             Personnage perso = joueur.getPerso();
             Class classePerso = joueur.getPerso().getClass();
@@ -94,7 +96,7 @@ public class World {
                 case "Combattre":
                     System.out.println("Indiquez le numero de la cible à attaquer.\nListe des creatures : " + Arrays.toString(listeCreatures.toArray()));
                     int numeroCible = keyboard.nextInt();
-                    Creature cible = listeCreatures.get(numeroCible);
+                    Creature cible = this.listeCreatures.get(numeroCible);
                     ((Combattant)perso).combattre(cible);
                     break;
                 case "Deplacer":
@@ -118,7 +120,7 @@ public class World {
             }
         }
         
-        for (Creature c : listeCreatures){
+        for (Creature c : this.listeCreatures){
             
         }
         
@@ -136,7 +138,7 @@ public class World {
         
         Random generateurAleatoire = new Random();
         Loup unLoup;
-        listeCreatures = new ArrayList<>();
+        
         Point2D pos;
         int pV;
         int pA;
@@ -144,12 +146,13 @@ public class World {
         int dA;
         int ptPara;
         int longueurListe = ThreadLocalRandom.current().nextInt(50, 100);
+        System.out.println(longueurListe);
         for (int i = 0; i < longueurListe; i++) {
             pos = creerPoint2DAlea();
             unLoup = new Loup(pos);
             listeCreatures.add(unLoup);
         }
-
+        System.out.println("ok");
         listeObjets = new ArrayList();
         Soin poposoin;
         longueurListe = ThreadLocalRandom.current().nextInt(5, 10);
@@ -188,17 +191,17 @@ public class World {
         int x;
         int y;
         Point2D pos;
-        boolean estLibre;
+        boolean estOccupee;
 
 
         do {
-            estLibre = true;
+            estOccupee = false;
             x = generateurAleatoire.nextInt(this.largeur);
             y = generateurAleatoire.nextInt(this.hauteur);
             pos = new Point2D(x, y);
-            estLibre = verifierPos(pos);
+            estOccupee = verifierPos(pos);
             
-        } while (estLibre);
+        } while (estOccupee);
         
         return pos;
     }
@@ -209,14 +212,14 @@ public class World {
      * @return true si la position n'est pas occupée
      */
     public boolean verifierPos(Point2D pos){
-        boolean estLibre = true;
+        boolean estOccupee = false;
         for (Creature o : listeCreatures) {
                 if (o.getPos().equals(pos)) {
-                    estLibre = false;
+                    estOccupee = true;
                     break;
                 }
         }
-        return estLibre;
+        return estOccupee;
     }
 
     public int getLargeur() {
