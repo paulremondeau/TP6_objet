@@ -121,14 +121,14 @@ public class World {
         longueurListe = ThreadLocalRandom.current().nextInt(5, 10);
         for (int i = 0; i < longueurListe; i++) {
             pos = new Point2D(generateurAleatoire.nextInt(this.largeur), generateurAleatoire.nextInt(this.hauteur));
-            poposoin = new Soin("Popo de soin", pos, ThreadLocalRandom.current().nextInt(10, 15));
+            poposoin = new Soin(pos, ThreadLocalRandom.current().nextInt(10, 15));
             listeObjets.add(poposoin);
         }
 
         Mana popomana;
         for (int i = 0; i < longueurListe; i++) {
             pos = new Point2D(generateurAleatoire.nextInt(this.largeur), generateurAleatoire.nextInt(this.hauteur));
-            popomana = new Mana("Popo de mana", pos, ThreadLocalRandom.current().nextInt(10, 15));
+            popomana = new Mana(pos, ThreadLocalRandom.current().nextInt(10, 15));
             listeObjets.add(popomana);
         }
     }

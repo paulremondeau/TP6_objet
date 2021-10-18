@@ -18,12 +18,11 @@ public abstract class Potion extends Objet{
     
     /**
      * Création d'une potion
-     * @param nom Nom de la potion.
      * @param puissance Puissance de la potion.
      * @param pos Position de l'objet.
      */
-    public Potion(String nom, Point2D pos, int puissance) {
-        super(nom, pos);
+    public Potion(Point2D pos, int puissance) {
+        super(pos);
         this.puissance = puissance;
     }
 

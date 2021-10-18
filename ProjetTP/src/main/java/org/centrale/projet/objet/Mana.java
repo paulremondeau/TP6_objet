@@ -13,12 +13,11 @@ public class Mana extends Potion{
     
     /**
      * Construction d'une potion de mana en spécifiant ses attributs
-     * @param nom Nom de la potion
      * @param puissance Valeur de point de mana gagnée lors de la consommation de la potion
      * @param pos Position de la potion.
      */
-    public Mana(String nom, Point2D pos, int puissance ) {
-        super(nom, pos, puissance);
+    public Mana(Point2D pos, int puissance ) {
+        super(pos, puissance);
     }
     
     @Override

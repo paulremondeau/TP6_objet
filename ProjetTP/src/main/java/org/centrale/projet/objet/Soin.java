@@ -13,12 +13,11 @@ public class Soin extends Potion{
     
     /**
      * Construction d'une potion de vie en spécifiant ses attributs 
-     * @param nom Nom de la potion
      * @param puissance Valeur de point de vie gagnée lors de la consommation de la potion
      * @param pos Position de la potion.
      */
-    public Soin(String nom, Point2D pos, int puissance) {
-        super(nom, pos, puissance);
+    public Soin(Point2D pos, int puissance) {
+        super(pos, puissance);
     }
     
     @Override
