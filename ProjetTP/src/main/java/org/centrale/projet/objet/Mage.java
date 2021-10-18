@@ -51,7 +51,7 @@ public class Mage extends Personnage implements Combattant{
      * @param vivant Indique si le mage est vivant
      */
     public Mage(String nom,Point2D pos, boolean vivant){
-        super(nom,pos,vivant);
+        super(nom,pos);
     
         this.setPtVie(ThreadLocalRandom.current().nextInt(25,30));
         this.setPtMana(ThreadLocalRandom.current().nextInt(70,80));

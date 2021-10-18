@@ -63,8 +63,8 @@ public abstract class Personnage extends Creature{
         this.distAttMax=perso.distAttMax;
     }
     
-    public Personnage(String nom,Point2D pos, boolean vivant){
-        super(pos,vivant);
+    public Personnage(String nom,Point2D pos){
+        super(pos);
         this.nom = nom;
     }
 

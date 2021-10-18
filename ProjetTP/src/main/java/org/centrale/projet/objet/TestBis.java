@@ -5,6 +5,8 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author remondeau
@@ -13,7 +15,16 @@ public class TestBis {
     public static void main(String[] args) {
         
         Archer aaa = new Archer();
-        System.out.println(aaa.getClass().getSimpleName());
+        Loup loulou = new Loup();
+        ArrayList<Personnage> listePersonnages = new ArrayList<>();
+        
+        listePersonnages.add(aaa);
+        Personnage test = listePersonnages.get(0);
+        
+        ((Combattant)test).combattre(loulou); 
+         
+        
+        //(Combattant) test.combattre(loulou);
         
         //Joueur moi = new Joueur(100, listeCreature);
         //System.out.println("Affichons le personnage du joueur :\n");

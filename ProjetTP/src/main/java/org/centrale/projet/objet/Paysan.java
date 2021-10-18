@@ -33,7 +33,7 @@ public class Paysan extends Personnage {
      * @param vivant Indique si le paysan est vivant
      */
     public Paysan(String nom,Point2D pos, boolean vivant){
-        super(nom,pos,vivant);
+        super(nom,pos);
     
         this.setPtVie(ThreadLocalRandom.current().nextInt(10,30));
         this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(5,10));

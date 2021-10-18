@@ -54,7 +54,7 @@ public class Guerrier extends Personnage implements Combattant{
      * @param vivant Indique si le guerrier est vivant
      */
     public Guerrier(String nom,Point2D pos, boolean vivant){
-        super(nom,pos,vivant);
+        super(nom,pos);
     
         this.setPtVie(ThreadLocalRandom.current().nextInt(80,100));
         this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(70,80));
