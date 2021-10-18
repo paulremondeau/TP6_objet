@@ -47,6 +47,8 @@ public class World {
         this.listeCreatures = new ArrayList<>();
         this.listeJoueurs = new ArrayList<>();
         this.listeObjets = new ArrayList<>();
+        this.largeur=100;
+        this.hauteur=100;
     }
 
     /**
@@ -111,6 +113,12 @@ public class World {
                     } while(verifierPos(destination));
                     
                     perso.deplacer(dx, dy);
+                    for (Objet o : this.listeObjets){
+                        if (o.getPos().equals(perso.getPos())){
+                            o.utiliser(perso);
+                            o.setUsed(true);
+                        }
+                    }
                     break;
 
                 case "Rien":
@@ -123,7 +131,7 @@ public class World {
         for (Creature c : this.listeCreatures){
             
         }
-        
+        this.listeObjets.removeIf(n -> n.isUsed()==true);
         System.out.println("Fin du tour de jeu !");
     }
 
@@ -133,8 +141,7 @@ public class World {
      * peuvent pas se trouver à plus de cinq unités les uns des autres.
      */
     public void creeMondeAlea() {
-        this.largeur=100;
-        this.hauteur=100;
+        
         
         Random generateurAleatoire = new Random();
         Loup unLoup;

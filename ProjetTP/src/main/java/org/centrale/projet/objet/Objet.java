@@ -12,6 +12,8 @@ package org.centrale.projet.objet;
 public abstract class Objet extends ElementDeJeu {
 
     private Point2D pos;
+    private boolean used;
+    
 
     /**
      * Constructeur d'un objet
@@ -19,6 +21,7 @@ public abstract class Objet extends ElementDeJeu {
      */
     public Objet(Point2D pos) {
         this.pos = pos;
+        this.used = false;
     }
 
     public Point2D getPos() {
@@ -32,4 +35,14 @@ public abstract class Objet extends ElementDeJeu {
     public void utiliser(Personnage p){
         System.out.println("Utilisation de "+ this.getClass().getSimpleName() + "par " + p.getNom());
     }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
+    
+    
 }
