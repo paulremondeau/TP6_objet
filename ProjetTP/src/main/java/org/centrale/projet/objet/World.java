@@ -19,9 +19,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class World {
 
     /**
-     * Taille du monde.
+     * Largeur du monde.
      */
-    private int TAILLE = 100;
+    private int largeur;
+    
+    /**
+     * Hauteur du monde.
+     */
+    private int hauteur;
 
     /**
      * Liste de créatures contrôlées automatiquement
@@ -86,7 +91,9 @@ public class World {
      * peuvent pas se trouver à plus de cinq unités les uns des autres.
      */
     public void creeMondeAlea() {
-
+        this.largeur=100;
+        this.hauteur=100;
+        
         Random generateurAleatoire = new Random();
         Loup unLoup;
         listeCreatures = new ArrayList<>();
@@ -113,14 +120,14 @@ public class World {
         Soin poposoin;
         longueurListe = ThreadLocalRandom.current().nextInt(5, 10);
         for (int i = 0; i < longueurListe; i++) {
-            pos = new Point2D(generateurAleatoire.nextInt(TAILLE), generateurAleatoire.nextInt(TAILLE));
+            pos = new Point2D(generateurAleatoire.nextInt(this.largeur), generateurAleatoire.nextInt(this.hauteur));
             poposoin = new Soin("Popo de soin", pos, ThreadLocalRandom.current().nextInt(10, 15));
             listeObjets.add(poposoin);
         }
 
         Mana popomana;
         for (int i = 0; i < longueurListe; i++) {
-            pos = new Point2D(generateurAleatoire.nextInt(TAILLE), generateurAleatoire.nextInt(TAILLE));
+            pos = new Point2D(generateurAleatoire.nextInt(this.largeur), generateurAleatoire.nextInt(this.hauteur));
             popomana = new Mana("Popo de mana", pos, ThreadLocalRandom.current().nextInt(10, 15));
             listeObjets.add(popomana);
         }
@@ -128,6 +135,7 @@ public class World {
 
     /**
      * Crée un joueur aléatoirement dans le monde.
+     * @return Donne le joueur qui a été créé.
      */
     public Joueur creeJoueurAlea() {
 
@@ -150,8 +158,8 @@ public class World {
 
         do {
             estLibre = true;
-            x = generateurAleatoire.nextInt(TAILLE);
-            y = generateurAleatoire.nextInt(TAILLE);
+            x = generateurAleatoire.nextInt(this.largeur);
+            y = generateurAleatoire.nextInt(this.hauteur);
             pos = new Point2D(x, y);
             for (Creature o : listeCreatures) {
                 if (o.getPos().equals(pos)) {
@@ -162,5 +170,21 @@ public class World {
         } while (estLibre);
         
         return pos;
+    }
+
+    public int getLargeur() {
+        return largeur;
+    }
+
+    public int getHauteur() {
+        return hauteur;
+    }
+
+    public void setLargeur(int largeur) {
+        this.largeur = largeur;
+    }
+
+    public void setHauteur(int hauteur) {
+        this.hauteur = hauteur;
     }
 }
