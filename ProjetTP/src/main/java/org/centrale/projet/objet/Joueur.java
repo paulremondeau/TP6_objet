@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package org.centrale.projet.objet;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
