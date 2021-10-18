@@ -9,65 +9,63 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Classe des guerriers. Sous-classe de Personnage.
- *
+ * Classe des voleurs, sous-classe des personnages.
  * @author bodet
  */
-public class Guerrier extends Personnage implements Combattant{
+public class Voleur extends Personnage implements Combattant {
 
     /**
      * Constructeur qui prend les attributs en paramètres.
      *
-     * @param nom Nom du guerrier
+     * @param nom Nom du voleur
      * @param pV Points de vie.
      * @param pA Pourcentage d'attaque.
      * @param pP Pourcentage de parade.
      * @param rM Résistance magique.
      * @param dA Dégat d'attaque.
-     * @param pos Position du guerrier.
+     * @param pos Position du voleur.
      * @param ptPara Point de parade.
-     * @param vivant Dit si le guerrier est vivant.
+     * @param vivant Dit si le voleur est vivant.
      */
-    public Guerrier(String nom, int pV, int pA, int pP, int rM, int dA, Point2D pos, int ptPara,boolean vivant) {
+    public Voleur(String nom, int pV, int pA, int pP, int rM, int dA, Point2D pos, int ptPara,boolean vivant) {
         super(nom, pV, 0, pA, pP, 0, rM, dA, 0, 1, pos, ptPara,vivant);
     }
 
     /**
-     * Constructeur de recopie
-     *
-     * @param g guerrier à recopier.
+     * Constructeur de recopie.
+     * @param v Voleur à recopier.
      */
-    public Guerrier(Guerrier g) {
-        super(g);
+    public Voleur(Voleur v) {
+        super(v);
     }
-
+    
     /**
      * Constructeur par défaut.
      */
-    public Guerrier() {
+    public Voleur(){
+        
     }
 
     /**
      * Constructeur aléatoire utilisé dans la classe Joueur
-     * @param nom Nom du guerrier
-     * @param pos Position du guerrier
-     * @param vivant Indique si le guerrier est vivant
+     * @param nom Nom du voleur
+     * @param pos Position du voleur
+     * @param vivant Indique si le voleur est vivant
      */
-    public Guerrier(String nom,Point2D pos, boolean vivant){
+    public Voleur(String nom,Point2D pos, boolean vivant){
         super(nom,pos,vivant);
     
         this.setPtVie(ThreadLocalRandom.current().nextInt(80,100));
-        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(70,80));
-        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(60,70));
-        this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(60,70));
-        this.setDegAtt(ThreadLocalRandom.current().nextInt(60,70));
-        this.setPtPar(ThreadLocalRandom.current().nextInt(60,70));    
+        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(50,70));
+        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(70,90));
+        this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(20,30));
+        this.setDegAtt(ThreadLocalRandom.current().nextInt(10,20));
+        this.setPtPar(ThreadLocalRandom.current().nextInt(2,7));    
     }
-    
-    
+
+
     /**
-     * Méthode combattre du guerrier
-     *
+     * Méthode combattre du voleur.
      * @param c Cible de l'attaque
      */
     @Override
@@ -75,8 +73,8 @@ public class Guerrier extends Personnage implements Combattant{
 
         if (this.getPos().distance(c.getPos()) == 1) { // Si la cible est au cac et qu'on a au moins un point de mana
             Random generateurAleatoire = new Random();
-            int jetGuerrier = generateurAleatoire.nextInt(100);
-            if (jetGuerrier <= this.getPourcentageAtt()) {
+            int jetVoleur = generateurAleatoire.nextInt(100);
+            if (jetVoleur <= this.getPourcentageAtt()) {
                 
                 int jetCreature = generateurAleatoire.nextInt(100);
                 if (jetCreature<=c.getPtPar()){ // Si la créature pare le coup
@@ -97,5 +95,9 @@ public class Guerrier extends Personnage implements Combattant{
             System.out.println("La cible est trop loin !");
         }
     }
-
+    
+    
+    
+    
+    
 }

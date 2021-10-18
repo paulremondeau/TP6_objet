@@ -46,9 +46,9 @@ public class Mage extends Personnage implements Combattant{
     
     /**
      * Constructeur aléatoire utilisé dans la classe Joueur
-     * @param nom
-     * @param pos
-     * @param vivant 
+     * @param nom Nom du mage
+     * @param pos Position du mage
+     * @param vivant Indique si le mage est vivant
      */
     public Mage(String nom,Point2D pos, boolean vivant){
         super(nom,pos,vivant);
@@ -74,6 +74,7 @@ public class Mage extends Personnage implements Combattant{
      *
      * @param c Cible de l'attaque
      */
+    @Override
     public void combattre(Creature c) {
 
         if (this.getPos().distance(c.getPos()) >= 1 && this.getPos().distance(c.getPos()) < this.getDistAttMax() && this.getPtMana() >= 1) { // Si la cible est au cac et qu'on a au moins un point de mana

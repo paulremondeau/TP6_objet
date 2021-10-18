@@ -133,15 +133,31 @@ public class ChargementPartie {
                 int ptM = Integer.parseInt(ligneListe.get(3));
                 int pA = Integer.parseInt(ligneListe.get(4));
                 int pP = Integer.parseInt(ligneListe.get(5));
-                
+                int pM = Integer.parseInt(ligneListe.get(6));
+                int rM = Integer.parseInt(ligneListe.get(7));
+                int dA = Integer.parseInt(ligneListe.get(8));
+                int dM = Integer.parseInt(ligneListe.get(9));
+                int distMax = Integer.parseInt(ligneListe.get(10));
+                int ptPara = Integer.parseInt(ligneListe.get(11));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                 
+                Mage unmage = new Mage(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara, true);
+                monde.listeCreatures.add(unmage);
+            }
+            case "Voleur" -> {
+                String nom = ligneListe.get(1);
+                int pV = Integer.parseInt(ligneListe.get(2));
+                int pA = Integer.parseInt(ligneListe.get(4));
+                int pP = Integer.parseInt(ligneListe.get(5));
                 int rM = Integer.parseInt(ligneListe.get(7));
                 int dA = Integer.parseInt(ligneListe.get(8));
                 int ptPara = Integer.parseInt(ligneListe.get(11));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
                  
-                Mage unmage = new Mage(nom, pV, ptM, pP, pM, rM, dM, distMax, pos, ptPara, vivant);
-                monde.listeCreatures.add(unmage);
+                Voleur unVoleur = new Voleur(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
+                monde.listeCreatures.add(unVoleur);
             }
+            
         }
         
         
