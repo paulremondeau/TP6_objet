@@ -25,7 +25,7 @@ public class ChargementPartie {
     
     /**
      * Constructeur du chargement de la partie
-     * @param nomFichier Nom du fichier à charger.
+     * @param nomFichier Nom du fichier à charger
      */
     public ChargementPartie(String nomFichier){
         this.source=nomFichier;
@@ -170,10 +170,10 @@ public class ChargementPartie {
                 int dA = Integer.parseInt(ligneListe.get(8));
                 int distMax = Integer.parseInt(ligneListe.get(10));
                 int ptPara = Integer.parseInt(ligneListe.get(11));
-                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                int nbF = Integer.parseInt(ligneListe.get(12));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
                 
-                // On donne 32 flèches quand on charge la partie
-                Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, 32, ptPara, true);  
+                Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, nbF, ptPara, true);  
                 monde.listeCreatures.add(unArcher);
             }
             case "Paysan" -> {
@@ -199,7 +199,8 @@ public class ChargementPartie {
                 int dM = Integer.parseInt(ligneListe.get(10));
                 int distMax = Integer.parseInt(ligneListe.get(11));
                 int ptPara = Integer.parseInt(ligneListe.get(12));
-                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
+                int nbF = Integer.parseInt(ligneListe.get(13));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(14)), Integer.parseInt(ligneListe.get(15)));
                 Joueur leJoueur = null;
                 
                 // Switch sur la classe du personnage du joueur
@@ -217,7 +218,7 @@ public class ChargementPartie {
                         leJoueur = new Joueur(unVoleur);
                     }
                     case "Archer" -> {
-                        Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, 32, ptPara, true);
+                        Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, nbF, ptPara, true);
                         leJoueur = new Joueur(unArcher);
                     }
                     case "Paysan" -> {
