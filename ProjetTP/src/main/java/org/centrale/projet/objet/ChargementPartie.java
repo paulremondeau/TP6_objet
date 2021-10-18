@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -74,11 +73,41 @@ public class ChargementPartie {
                 monde.setHauteur(i); 
             }
             case "Loup" -> {
-                int pV = parseInt(ligneListe.get(1));
-                
-                Loup unLoup = new Loup(int pV, int pA, int pP, int dA, Point2D pos, int ptPara,boolean vivant);
+                int pV = Integer.parseInt(ligneListe.get(1));
+                int pA = Integer.parseInt(ligneListe.get(2));
+                int pP = Integer.parseInt(ligneListe.get(3));
+                int dA = Integer.parseInt(ligneListe.get(4));
+                int ptPara = Integer.parseInt(ligneListe.get(5));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(6)), Integer.parseInt(ligneListe.get(7)));
+                Loup unLoup = new Loup(pV, pA, pP, dA, pos, ptPara, true);
                 monde.listeCreatures.add(unLoup);
             }
+            case "Lapin" -> {
+                int pV = Integer.parseInt(ligneListe.get(1));
+                int pA = Integer.parseInt(ligneListe.get(2));
+                int pP = Integer.parseInt(ligneListe.get(3));
+                int dA = Integer.parseInt(ligneListe.get(4));
+                int ptPara = Integer.parseInt(ligneListe.get(5));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(6)), Integer.parseInt(ligneListe.get(7)));
+                Lapin unLapin = new Lapin(pV, pA, pP, dA, pos, ptPara, true);
+                monde.listeCreatures.add(unLapin);
+            }
+            case "Soin" -> {
+                int puissance = Integer.parseInt(ligneListe.get(1));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(2)), Integer.parseInt(ligneListe.get(3)));
+                Soin unePotionSoin = new Soin(pos, puissance);
+                monde.listeObjets.add(unePotionSoin);
+            }
+            case "Mana" -> {
+                int puissance = Integer.parseInt(ligneListe.get(1));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(2)), Integer.parseInt(ligneListe.get(3)));
+                Mana unePotionMana = new Mana(pos, puissance);
+                monde.listeObjets.add(unePotionMana);
+            }
+            case "NuageToxique" -> {
+                
+            }
+            
         }
         
         
