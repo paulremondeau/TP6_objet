@@ -5,6 +5,8 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Classe des créatures.
  * @author bodet
@@ -55,15 +57,15 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     
     
     /**
-     * Constructeur servant dans la création  d'un Joueur
+     * Constructeur servant dans la création  d'un Joueur et d'un Monstre
      * @param pos
      * @param vivant 
      */
-    public Creature(Point2D pos, boolean vivant){
+    public Creature(Point2D pos){
         this.pos = pos;
-        this.vivant = vivant;
+        this.vivant=true;
     }
-
+    
     /**
      * Construit une créature avec les valeurs par défaut.
      */

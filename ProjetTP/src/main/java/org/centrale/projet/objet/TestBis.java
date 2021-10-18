@@ -19,12 +19,9 @@ public class TestBis {
         ArrayList<Personnage> listePersonnages = new ArrayList<>();
         
         listePersonnages.add(aaa);
-        
         Personnage test = listePersonnages.get(0);
         
-        
-        Class[] faces = test.getClass().getInterfaces();
-        Class comb = faces[0].getClass();
+        ((Combattant)test).combattre(loulou); 
          
         
         //(Combattant) test.combattre(loulou);

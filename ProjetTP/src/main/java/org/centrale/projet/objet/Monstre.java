@@ -34,6 +34,10 @@ public abstract class Monstre extends Creature{
         super(m);
     }
     
+    public Monstre(Point2D pos){
+        super(pos);
+    }
+    
     /**
      * Constructeur par défaut.
      */

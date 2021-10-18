@@ -90,13 +90,13 @@ public class World {
             
 
             switch (action) {
+                
                 case "Combattre":
                     System.out.println("Indiquez le numero de la cible à attaquer.\nListe des creatures : " + Arrays.toString(listeCreatures.toArray()));
                     int numeroCible = keyboard.nextInt();
                     Creature cible = listeCreatures.get(numeroCible);
-                    //((classePerso)perso).combattre(cible);
+                    ((Combattant)perso).combattre(cible);
                     break;
-
                 case "Deplacer":
                     System.out.println("Veuillez vous déplacer.");
                     int dx;
@@ -145,15 +145,9 @@ public class World {
         int ptPara;
         int longueurListe = ThreadLocalRandom.current().nextInt(50, 100);
         for (int i = 0; i < longueurListe; i++) {
-            pV = ThreadLocalRandom.current().nextInt(5, 10);
-            pA = ThreadLocalRandom.current().nextInt(1, 5);
-            pP = ThreadLocalRandom.current().nextInt(0, 1);
-            dA = ThreadLocalRandom.current().nextInt(1, 3);
-            ptPara = ThreadLocalRandom.current().nextInt(5, 15);
             pos = creerPoint2DAlea();
-            unLoup = new Loup(pV, pA, pP, dA, pos, ptPara, true);
+            unLoup = new Loup(pos);
             listeCreatures.add(unLoup);
-            break;
         }
 
         listeObjets = new ArrayList();

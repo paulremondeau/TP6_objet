@@ -44,7 +44,7 @@ public class Archer extends Personnage implements Combattant{
      * @param vivant Indique si l'archer est vivant 
      */
     public Archer(String nom,Point2D pos, boolean vivant){
-        super(nom,pos,vivant);
+        super(nom,pos);
     
         this.nbFleches = ThreadLocalRandom.current().nextInt(20,30);
         this.setPtVie(ThreadLocalRandom.current().nextInt(40,50));

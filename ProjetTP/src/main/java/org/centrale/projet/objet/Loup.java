@@ -6,6 +6,7 @@
 package org.centrale.projet.objet;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * La classe des louups
@@ -33,6 +34,15 @@ public class Loup extends Monstre implements Combattant{
      */
     public Loup(Loup l) {
         super(l);
+    }
+    
+    public Loup(Point2D pos){
+        super(pos);
+        this.setPtVie(ThreadLocalRandom.current().nextInt(5, 10));
+        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(1, 5));
+        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(0, 1));
+        this.setDegAtt(ThreadLocalRandom.current().nextInt(1, 3));
+        this.setPtPar(ThreadLocalRandom.current().nextInt(5, 15));
     }
 
     /**

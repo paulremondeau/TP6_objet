@@ -53,7 +53,7 @@ public class Voleur extends Personnage implements Combattant {
      * @param vivant Indique si le voleur est vivant
      */
     public Voleur(String nom,Point2D pos, boolean vivant){
-        super(nom,pos,vivant);
+        super(nom,pos);
     
         this.setPtVie(ThreadLocalRandom.current().nextInt(80,100));
         this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(50,70));
