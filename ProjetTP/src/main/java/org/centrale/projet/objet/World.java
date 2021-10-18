@@ -77,19 +77,18 @@ public class World {
         for (Joueur joueur : this.listeJoueurs) {
             
             Personnage perso = joueur.getPerso();
-            Class classePerso = joueur.getPerso().getClass();
             
 
             System.out.println("C'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + "Que voulez-vous faire ?");
             String action;
             
-            if (classePerso.getSimpleName()=="Paysan"){
-                action = "Déplacer";
-            } else{
+            if (perso instanceof Combattant){
                 do {
-                action = keyboard.nextLine();
+                    action = keyboard.nextLine();
                 } while (!action.equals("Combattre") && !action.equals("Déplacer") && !action.equals("Rien"));
-            }   
+            } else{   
+                action = "Déplacer";
+            }
            
             
 
@@ -130,6 +129,16 @@ public class World {
         
         for (Creature c : this.listeCreatures){
             
+            for (Joueur joueur : this.listeJoueurs){
+                
+                if (c instanceof Combattant){
+                    if(c.getPos().distance(joueur.getPerso().getPos())==1){
+                        ((Combattant)c).combattre(joueur.getPerso());
+                    }else{
+                        /////////
+                    }
+                }   
+            }
         }
         this.listeObjets.removeIf(n -> n.isUsed()==true);
         System.out.println("Fin du tour de jeu !");

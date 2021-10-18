@@ -50,6 +50,7 @@ public abstract class Monstre extends Creature{
      */
     @Override
     public void affiche(){
+        System.out.println("Le monstre est un "+this.getClass().getSimpleName());
         System.out.println("Le monstre a "+ this.getPtVie()+" points de vie et se situe en " + this.getPos() + ".");
         System.out.println("Le monstre a un pourcentage d'attaque de "+ this.getPourcentageAtt() +"%.");
         System.out.println("Le monstre a un pourcentage de parade de "+ this.getPtPar() +"%.");
