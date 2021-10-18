@@ -6,9 +6,18 @@
 package org.centrale.projet.objet;
 
 /**
- * Classe des éléments du jeu World of ECN.
+ *
  * @author remondeau
  */
-public abstract class ElementDeJeu {
- 
+public class MalusDegAtt extends Nourriture{
+    
+    private static String carac = "degAtt";
+    
+
+    public MalusDegAtt(int puissance, int duree) {
+        super(puissance, duree);
+    }
+    
+    
+    
 }

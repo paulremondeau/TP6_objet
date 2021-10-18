@@ -5,6 +5,8 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.ArrayList;
+
 /**
  * Classe des personnages. Sous-classe des creatures.
  * @author bodet
@@ -17,6 +19,8 @@ public abstract class Personnage extends Creature{
     private int pourcentageResistMag;
     private int degMag;
     private int distAttMax;
+    
+    public ArrayList<Nourriture> listeNourriture;
 
     
     /**
@@ -113,6 +117,12 @@ public abstract class Personnage extends Creature{
     public int getDistAttMax() {
         return this.distAttMax;
     }
+
+    public ArrayList<Nourriture> getListeNourriture() {
+        return listeNourriture;
+    }
+    
+    
     
     /**
      * Teste si le personnage se situe sur une potion, il l'utilise et le détruit si c'est le cas. 

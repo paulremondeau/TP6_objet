@@ -6,16 +6,16 @@
 package org.centrale.projet.objet;
 
 /**
- * La classe des tartes
+ *
  * @author remondeau
  */
-public class Tarte extends Nourriture{
-    
-    public Tarte(String carac, int puissance) {
-        super(carac, puissance);
-        this.carac = "pA";
+public class BonusPtPar extends Nourriture{
+       
+    public BonusPtPar(int puissance,int duree){
+        super(puissance,duree);
     }
     
-    
-    
+    public void utiliser(Personnage p){
+        p.listeNourriture.add(this);
+    }
 }

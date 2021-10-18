@@ -11,19 +11,24 @@ package org.centrale.projet.objet;
  */
 public abstract class Nourriture extends Object {
     
-    String carac;
-    int puissance;
-
+    private int puissance;
+    private int duree;
+    private String carac;
+    
     /**
      * 
      * @param carac la caractéristique qui sera modifiée
      * @param puissance la valeur du bonus/valus que procure la nourriture
      */
-    public Nourriture(String carac, int puissance) {
-        this.carac = carac;
+    public Nourriture(int puissance,int duree,String carac) {
         this.puissance = puissance;
+        this.duree = duree;
+        this.carac = carac;
     }
     
+    public void utiliser(Personnage p){
+        p.getListeNourriture().add(this);
+    }
     
     
 }
