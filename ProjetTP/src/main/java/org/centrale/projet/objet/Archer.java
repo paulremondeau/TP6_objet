@@ -5,8 +5,6 @@
  */
 package org.centrale.projet.objet;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -40,104 +38,10 @@ public class Archer extends Personnage implements Combattant{
     }
     
     /**
-     * Construit un archer à une position aléatoire en précisant ses attributs tout en définissant la taille du monde et une liste d'archers déjà existants. Le nouvel archer est sur une position différente.
-     * @param listeArcher Liste des archers pour lesquels la position doit être différente. Liste chaînée.
-     * @param taille Taille du monde. Le monde est carré.
-     * @param nom Nom de l'archer
-     * @param pV Point de vie
-     * @param pA Pourcentage d'attaque
-     * @param pP Pourcentage de parade
-     * @param pM Pourcentage de magie
-     * @param rM Pourcentage de résistance magique
-     * @param dA Dégats d'attaque
-     * @param dM Dégats magique
-     * @param distMax Distance maximale d'attaque 
-     * @param nbF Nombre de flèches de l'archer
-     * @param ptPara Point de parade.
-     * @param vivant Dit si l'archer est vivant.
-     */
-    public Archer(LinkedList<Archer> listeArcher, int taille, String nom, int pV, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, int  nbF, int ptPara,boolean vivant) {
-        super(nom, pV, 0, pA, pP, pM, rM, dA, dM, distMax, new Point2D(), ptPara,vivant);   // On sous-entend que l'archer a 0 points de mana
-        this.nbFleches = nbF;
-        Random generateurAleatoire = new Random();        
-        int posX;
-        int posY;
-        Point2D pos = null;
-        boolean estDifferente=false;
-        boolean estLibre;
-        
-        // Il faudrait rajouter une condition sur la taille du monde et la taille de la liste de personnages afin de ne pas entrer dans une boucle while infinie. A voir plus tard
-        
-        while (estDifferente!=true) { // Tant qu'une position acceptable n'a pas été trouvée, on en génère une autre aléatoirement.
-            posX = generateurAleatoire.nextInt(taille);
-            posY = generateurAleatoire.nextInt(taille);
-            pos = new Point2D(posX, posY);
-            estLibre = true;
-            for (Archer a : listeArcher) { // On parcourt la liste d'archers pour vérifier que la position n'est pas déjà prise
-                if (a.getPos().equals(pos)) {
-                    estLibre = false;
-                }
-            }
-            
-            if (estLibre) {
-                estDifferente=true; // Fin de la boucle while si une position a été trouvée
-            }
-        }
-        this.setPos(pos);
-    }
-    
-    /**
-     * Construit un archer à une position aléatoire en précisant ses attributs tout en définissant la taille du monde et une liste d'archers déjà existants. Le nouvel archer est sur une position différente.
-     * @param listeArcher Liste des archers pour lesquels la position doit être différente. Tableau.
-     * @param taille Taille du monde. Le monde est carré.
-     * @param nom Nom de l'archer
-     * @param pV Point de vie
-     * @param pA Pourcentage d'attaque
-     * @param pP Pourcentage de parade
-     * @param pM Pourcentage de magie
-     * @param rM Pourcentage de résistance magique
-     * @param dA Dégats d'attaque
-     * @param dM Dégats magique
-     * @param distMax Distance maximale d'attaque 
-     * @param nbF Nombre de flèches de l'archer
-     * @param ptPara Point de parade.
-     * @param vivant Dit si l'archer est vivant.
-     */
-    public Archer(ArrayList<Archer> listeArcher, int taille, String nom, int pV, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, int  nbF, int ptPara,boolean vivant) {
-        super(nom, pV, 0, pA, pP, pM, rM, dA, dM, distMax, new Point2D(), ptPara,vivant);   // On sous-entend que l'archer a 0 points de mana
-        this.nbFleches = nbF;
-        Random generateurAleatoire = new Random();        
-        int posX;
-        int posY;
-        Point2D pos = null;
-        boolean estDifferente=false;
-        boolean estLibre;
-        
-        // Il faudrait rajouter une condition sur la taille du monde et la taille de la liste de personnages afin de ne pas entrer dans une boucle while infinie. A voir plus tard
-        
-        while (estDifferente!=true) { // Tant qu'une position acceptable n'a pas été trouvée, on en génère une autre aléatoirement.
-            posX = generateurAleatoire.nextInt(taille);
-            posY = generateurAleatoire.nextInt(taille);
-            pos = new Point2D(posX, posY);
-            estLibre = true;
-            for (Archer a : listeArcher) { // On parcourt la liste d'archers pour vérifier que la position n'est pas déjà prise
-                if (a.getPos().equals(pos)) {
-                    estLibre = false;
-                }
-            }
-            
-            if (estLibre) {
-                estDifferente=true; // Fin de la boucle while si une position a été trouvée
-            }
-        }
-        this.setPos(pos);
-    }
-    
-    /**
      * Constructeur aléatoire utilisé dans la classe Joueur
-     * @param nom
-     * @param pos
-     * @param vivant 
+     * @param nom Nom de l'archer
+     * @param pos Position de l'archer
+     * @param vivant Indique si l'archer est vivant 
      */
     public Archer(String nom,Point2D pos, boolean vivant){
         super(nom,pos,vivant);
@@ -189,6 +93,7 @@ public class Archer extends Personnage implements Combattant{
      *
      * @param c Cible de l'attaque
      */
+    @Override
     public void combattre(Creature c) {
 
         if (this.getPos().distance(c.getPos()) > 1 && this.getPos().distance(c.getPos()) < this.getDistAttMax() && this.getNbFleches() >= 1) { // Si la cible est au cac et qu'on a au moins un point de mana

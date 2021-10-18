@@ -19,9 +19,11 @@ public class Mage extends Personnage implements Combattant{
      * @param nom Nom du mage
      * @param pV Points de vie.
      * @param ptM Points de magie.
+     * @param pA Pourcentage d'attaque.
      * @param pP Pourcentage de parade.
      * @param pM Pourcentage de magie.
      * @param rM Résistance magique.
+     * @param dA Dégat d'attaque.
      * @param dM Dégat magique.
      * @param distMax Distance d'attaque maximale.
      * @param pos Position du mage.
@@ -29,8 +31,8 @@ public class Mage extends Personnage implements Combattant{
      * @param vivant Dit si le mage est vivant.
      */
 
-    public Mage(String nom, int pV, int ptM, int pP, int pM, int rM,  int dM, int distMax, Point2D pos, int ptPara,boolean vivant) {
-        super(nom, pV, ptM, 0, pP, pM, rM, 0, dM, distMax, pos, ptPara,vivant);
+    public Mage(String nom, int pV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, Point2D pos, int ptPara,boolean vivant) {
+        super(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara,vivant);
     }
 
     
@@ -44,9 +46,9 @@ public class Mage extends Personnage implements Combattant{
     
     /**
      * Constructeur aléatoire utilisé dans la classe Joueur
-     * @param nom
-     * @param pos
-     * @param vivant 
+     * @param nom Nom du mage
+     * @param pos Position du mage
+     * @param vivant Indique si le mage est vivant
      */
     public Mage(String nom,Point2D pos, boolean vivant){
         super(nom,pos,vivant);
@@ -72,6 +74,7 @@ public class Mage extends Personnage implements Combattant{
      *
      * @param c Cible de l'attaque
      */
+    @Override
     public void combattre(Creature c) {
 
         if (this.getPos().distance(c.getPos()) >= 1 && this.getPos().distance(c.getPos()) < this.getDistAttMax() && this.getPtMana() >= 1) { // Si la cible est au cac et qu'on a au moins un point de mana

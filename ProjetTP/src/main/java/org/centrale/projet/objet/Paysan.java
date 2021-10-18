@@ -33,9 +33,9 @@ public class Paysan extends Personnage {
     
     /**
      * Constructeur aléatoire utilisé dans la classe Joueur
-     * @param nom
-     * @param pos
-     * @param vivant 
+     * @param nom Nom du paysan
+     * @param pos Position du paysan
+     * @param vivant Indique si le paysan est vivant
      */
     public Paysan(String nom,Point2D pos, boolean vivant){
         super(nom,pos,vivant);
@@ -54,7 +54,7 @@ public class Paysan extends Personnage {
     
     /**
      * Constructeur de recopie.
-     * @param p 
+     * @param p Paysan à recopier
      */
     public Paysan(Paysan p){
         super(p);
