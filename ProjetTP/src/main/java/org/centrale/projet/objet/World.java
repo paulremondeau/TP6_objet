@@ -183,7 +183,6 @@ public class World {
             unLoup = new Loup(pos);
             listeCreatures.add(unLoup);
         }
-        System.out.println("ok");
         listeObjets = new ArrayList();
         Soin poposoin;
         longueurListe = ThreadLocalRandom.current().nextInt(5, 10);
@@ -255,7 +254,9 @@ public class World {
         }
         return estOccupee;
     }
-    
+    /**
+     * Renvoie une liste des créatures et leur positions de façon jolie et lisible.
+     */
     public void visualiserPlateau(){
         for (Creature o : listeCreatures) {
             System.out.println(o);
@@ -278,5 +279,19 @@ public class World {
     public void setHauteur(int hauteur) {
         this.hauteur = hauteur;
     }
+
+    public ArrayList<Creature> getListeCreatures() {
+        return listeCreatures;
+    }
+
+    public ArrayList<Joueur> getListeJoueurs() {
+        return listeJoueurs;
+    }
+
+    public ArrayList<Objet> getListeObjets() {
+        return listeObjets;
+    }
+    
+    
     
 }

@@ -71,10 +71,12 @@ public class ChargementPartie {
             case "Largeur" -> {
                 int i = Integer.parseInt(ligneListe.get(1));
                 monde.setLargeur(i);
+                break;
             }
             case "Hauteur" -> {
                 int i = Integer.parseInt(ligneListe.get(1));
-                monde.setHauteur(i); 
+                monde.setHauteur(i);
+                break;
             }
             case "Loup" -> {
                 int pV = Integer.parseInt(ligneListe.get(1));
@@ -85,6 +87,7 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(6)), Integer.parseInt(ligneListe.get(7)));
                 Loup unLoup = new Loup(pV, pA, pP, dA, pos, ptPara, true);
                 monde.listeCreatures.add(unLoup);
+                break;
             }
             case "Lapin" -> {
                 int pV = Integer.parseInt(ligneListe.get(1));
@@ -95,18 +98,21 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(6)), Integer.parseInt(ligneListe.get(7)));
                 Lapin unLapin = new Lapin(pV, pA, pP, dA, pos, ptPara, true);
                 monde.listeCreatures.add(unLapin);
+                break;
             }
             case "Soin" -> {
                 int puissance = Integer.parseInt(ligneListe.get(1));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(2)), Integer.parseInt(ligneListe.get(3)));
                 Soin unePotionSoin = new Soin(pos, puissance);
                 monde.listeObjets.add(unePotionSoin);
+                break;
             }
             case "Mana" -> {
                 int puissance = Integer.parseInt(ligneListe.get(1));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(2)), Integer.parseInt(ligneListe.get(3)));
                 Mana unePotionMana = new Mana(pos, puissance);
                 monde.listeObjets.add(unePotionMana);
+                break;
             }
             case "NuageToxique" -> {
                 int pourcentageAtt = Integer.parseInt(ligneListe.get(1));
@@ -117,6 +123,7 @@ public class ChargementPartie {
                 
                 NuageToxique unNuageToxique = new NuageToxique(pos, pourcentageAtt, pourcentagePar, degAtt, ptPar);
                 monde.listeObjets.add(unNuageToxique);
+                break;
             }
             case "Guerrier" -> {
                 String nom = ligneListe.get(1);
@@ -130,6 +137,7 @@ public class ChargementPartie {
                  
                 Guerrier unGuerrier = new Guerrier(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
                 monde.listeCreatures.add(unGuerrier);
+                break;
             }
             case "Mage" -> {
                 String nom = ligneListe.get(1);
@@ -147,6 +155,7 @@ public class ChargementPartie {
                  
                 Mage unmage = new Mage(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara, true);
                 monde.listeCreatures.add(unmage);
+                break;
             }
             case "Voleur" -> {
                 String nom = ligneListe.get(1);
@@ -175,6 +184,7 @@ public class ChargementPartie {
                 
                 Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, nbF, ptPara, true);  
                 monde.listeCreatures.add(unArcher);
+                break;
             }
             case "Paysan" -> {
                 String nom = ligneListe.get(1);
@@ -208,22 +218,27 @@ public class ChargementPartie {
                     case "Guerrier" -> {
                         Guerrier unGuerrier = new Guerrier(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
                         leJoueur = new Joueur(unGuerrier);
+                        break;
                     }
                     case "Mage" -> {
                         Mage unMage = new Mage(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara, true);
                         leJoueur = new Joueur(unMage);
+                        break;
                     }
                     case "Voleur" -> {
                         Voleur unVoleur = new Voleur(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
                         leJoueur = new Joueur(unVoleur);
+                        break;
                     }
                     case "Archer" -> {
                         Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, nbF, ptPara, true);
                         leJoueur = new Joueur(unArcher);
+                        break;
                     }
                     case "Paysan" -> {
                         Paysan unPaysan = new Paysan(nom, pV, pP, distMax, pos, ptPara, true);
                         leJoueur = new Joueur(unPaysan);
+                        break;
                     }
                 }
                 monde.listeJoueurs.add(leJoueur);
