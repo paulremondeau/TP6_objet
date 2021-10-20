@@ -20,7 +20,7 @@ public abstract class Personnage extends Creature{
     private int degMag;
     private int distAttMax;
     
-    public ArrayList<Nourriture> listeNourriture;
+    private ArrayList<Nourriture> listeNourriture;
 
     
     /**
@@ -47,6 +47,7 @@ public abstract class Personnage extends Creature{
         this.pourcentageResistMag = rM;
         this.degMag = dM;
         this.distAttMax = distMax;
+        this.listeNourriture = new ArrayList();
     }
 
     /**
@@ -61,11 +62,13 @@ public abstract class Personnage extends Creature{
         this.pourcentageResistMag=perso.pourcentageResistMag;
         this.degMag=perso.degMag;
         this.distAttMax=perso.distAttMax;
+        this.listeNourriture = new ArrayList();
     }
     
     public Personnage(String nom,Point2D pos){
         super(pos);
         this.nom = nom;
+        this.listeNourriture = new ArrayList();
     }
 
     /**

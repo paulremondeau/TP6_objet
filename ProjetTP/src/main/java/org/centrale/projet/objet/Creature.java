@@ -126,6 +126,8 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
         this.ptPar = value;
     }
     
+    
+    
     /**
      * Déplace le monstre sur une des cases adjacentes en utilisant +1, 0 ou -1 dans x et y. Il est possible d'avoir un déplacement nul
      * 
@@ -155,7 +157,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     public String toString(){
         
         String res = "";
-        res += this.getClass() + "à la position" + this.pos.toString();
+        res += this.getClass().getSimpleName() + "est à la position " + this.pos.toString();
         
         return res;
     }

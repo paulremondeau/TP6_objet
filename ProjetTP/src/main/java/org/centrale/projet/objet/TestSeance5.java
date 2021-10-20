@@ -16,6 +16,7 @@ public class TestSeance5 {
         World monde = new World();
         monde.creeMondeAlea();
         
+        
         Joueur moi = monde.creeJoueurAlea();
         System.out.println("Affichons le personnage du joueur :\n");
         moi.getPerso().affiche();
@@ -24,6 +25,8 @@ public class TestSeance5 {
         System.out.println("Potion 0 en position : "+ monde.listeObjets.get(0).getPos());
         System.out.println("Nombre de créatures : "+ monde.listeCreatures.size());
         System.out.println("Nombre de potions : "+ monde.listeObjets.size());
+        
+        monde.tourDeJeu();
         
         
         
