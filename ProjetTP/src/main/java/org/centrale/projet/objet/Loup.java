@@ -81,5 +81,10 @@ public class Loup extends Monstre implements Combattant{
         } else {
             System.out.println("La cible est trop loin !");
         }
+        
+        if (c.getPtVie()<0){
+            c.setVivant(false);
+        }
     }
+    
 }

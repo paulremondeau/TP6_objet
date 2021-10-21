@@ -5,6 +5,9 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * La classe du nuage toxique
  * @author remondeau
@@ -16,10 +19,26 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
     private int degAtt;
     private int ptPar;
     
+    /**
+     * Génére un nuage toxique avec des statistiques aléatoires.
+     * @param pos Position du nuage
+     */
     public NuageToxique(Point2D pos) {
         super(pos);
-    }
 
+        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(70,80));
+        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(60,70));
+        this.setDegAtt(ThreadLocalRandom.current().nextInt(60,70));
+        this.setPtPar(ThreadLocalRandom.current().nextInt(60,70));    
+    }
+    /**
+     * Génère un nuage toxique en spécifiant tous ses attributs
+     * @param pos Position du nuage
+     * @param pourcentageAtt Pourcentage d'attaque du nuage
+     * @param pourcentagePar Pourcentage de parade du nuage
+     * @param degAtt Dégats d'attaque du nuage
+     * @param ptPar Points de parade du nuage
+     */
     public NuageToxique(Point2D pos, int pourcentageAtt, int pourcentagePar, int degAtt, int ptPar) {
         super(pos);
         this.pourcentageAtt = pourcentageAtt;
@@ -59,12 +78,46 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
     }
-
+    
+    /**
+     * Combat du nuage
+     * @param c Créature ciblée
+     */
     @Override
     public void combattre(Creature c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.getPos().distance(c.getPos()) == 1) { // Si la cible est au cac et qu'on a au moins un point de mana
+            Random generateurAleatoire = new Random();
+            int jet = generateurAleatoire.nextInt(100);
+            if (jet <= this.getPourcentageAtt()) {
+                
+                int jetCreature = generateurAleatoire.nextInt(100);
+                if (jetCreature<=c.getPtPar()){ // Si la créature pare le coup
+                    System.out.println("La cible a paré le coup !");
+                    int degat;
+                    degat = Math.max(0,this.getDegAtt()-c.getPtPar());
+                    c.setPtVie(c.getPtVie()-degat);
+                }
+                else{
+                    System.out.println("La cible a pris un coup direct !");
+                    c.setPtVie(c.getPtVie() - this.getDegAtt());
+                }
+                
+            } else {
+                System.out.println("L'attaque a échoué...");
+            }
+        } else {
+            System.out.println("La cible est trop loin !");
+        }
+        
+        if (c.getPtVie()<0){
+            c.setVivant(false);
+        }    
     }
-    
+    /**
+     * Déplacement du nuage
+     * @param x
+     * @param y 
+     */
     @Override
     public void deplacer(int x, int y) {
         
@@ -76,5 +129,10 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
         }
     }
     
+    public void affiche(){
+        super.affiche();
+        System.out.println("Le nuage toxique a un pourcentage d'attaque de "+ this.pourcentageAtt +"%.");
+        System.out.println("La nuage toxique a "+ this.degAtt +" points d'attaque et "+this.ptPar+" points de parade.");
+    }
     
 }

@@ -5,8 +5,6 @@
  */
 package org.centrale.projet.objet;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 /**
  * Classe des créatures.
  * @author bodet
@@ -125,6 +123,14 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     public void setPtPar(int value) {
         this.ptPar = value;
     }
+
+    public void setVivant(boolean vivant) {
+        this.vivant = vivant;
+    }
+
+    public boolean isVivant() {
+        return vivant;
+    }
     
     
     
@@ -157,7 +163,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     public String toString(){
         
         String res = "";
-        res += this.getClass().getSimpleName() + "est à la position " + this.pos.toString();
+        res += this.getClass().getSimpleName() + " est à la position " + this.pos.toString();
         
         return res;
     }

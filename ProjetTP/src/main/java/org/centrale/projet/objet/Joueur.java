@@ -67,6 +67,13 @@ public class Joueur {
         return perso;
     }
     
+    /**
+     * Affiche les informations d'un joueur.
+     */
+    public void affiche(){
+        System.out.println("Description du joueur :");
+        perso.affiche();
+    }
     
 }
 

@@ -43,5 +43,10 @@ public abstract class Potion extends Objet{
         super.utiliser(p);
         System.out.println("La potion est utilisée ! ");
     }
+    
+    public void affiche(){
+        super.affiche();
+        System.out.println("Elle possède une puissance de "+this.puissance+".");
+    }
 
 }

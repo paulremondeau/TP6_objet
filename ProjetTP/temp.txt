@@ -1,2 +1,10 @@
 Largeur 100
 Hauteur 100
+Loup 7 2 0 0 2 10 87 56 
+Soin 14 52 15
+Soin 12 6 93
+Mana 13 19 78
+Mana 10 14 28
+NuageToxique 70 64 64 67 85 97 
+NuageToxique 73 60 67 69 74 76 
+Joueur Guerrier Musclor 80 0 74 64 0 62 64 0 0 66 21 54 

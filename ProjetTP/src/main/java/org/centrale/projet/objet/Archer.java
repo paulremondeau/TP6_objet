@@ -100,6 +100,7 @@ public class Archer extends Personnage implements Combattant{
             this.setNbFleches(this.getNbFleches() - 1); // On retire un point de mana
             if (jetArcher <= this.getPourcentageAtt()) {
                     c.setPtVie(c.getPtVie() - this.getDegAtt());
+                    System.out.println("L'attaque a réussi ! "+c.getClass().getSimpleName() + " a subi "+ this.getDegAtt() +" points de dégats.");
                 }
             else {
                 System.out.println("L'attaque a échoué...");
@@ -107,6 +108,10 @@ public class Archer extends Personnage implements Combattant{
         } else {
             System.out.println("La cible n'est pas à portée !");
         }
+                
+        if (c.getPtVie()<0){
+            c.setVivant(false);
+        }        
     }
     
 }

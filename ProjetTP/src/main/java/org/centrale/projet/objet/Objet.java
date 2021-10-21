@@ -44,5 +44,10 @@ public abstract class Objet extends ElementDeJeu {
         this.used = used;
     }
     
-    
+    /**
+     * Affichage de l'objet
+     */
+    public void affiche(){
+        System.out.println("L'objet " + this.getClass().getSimpleName()+ " est situé en " + this.pos + ".");
+    }
 }

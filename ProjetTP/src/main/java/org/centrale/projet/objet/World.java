@@ -5,6 +5,8 @@
  */
 package org.centrale.projet.objet;
 
+import java.io.File;
+import static java.lang.String.valueOf;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -54,7 +56,8 @@ public class World {
     /**
      * Implémente les tours de jeu.
      */
-    public void tourDeJeu() {
+    public int tourDeJeu() {
+        int indicator = 0; // Si égal à 1, met fin à la partie.
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Un nouveau tour commence !"); // Début du tour
 
@@ -78,25 +81,23 @@ public class World {
 
             Personnage perso = joueur.getPerso();
 
-            System.out.println("C'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + "Que voulez-vous faire ?");
+            System.out.println("\nC'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + ". Que voulez-vous faire ? Combattre/Deplacer/Sauvegarder");
             String action;
 
-            if (perso instanceof Combattant) {
-                do {
-                    action = keyboard.nextLine();
-                } while (!action.equals("Combattre") && !action.equals("Deplacer") && !action.equals("Rien"));
-            } else {
-                action = "Deplacer";
-            }
+            do {
+                action = keyboard.nextLine();
+            } while (!action.equals("Combattre") && !action.equals("Deplacer") && !action.equals("Rien") && !action.equals("Sauvegarder"));
 
             switch (action) {
 
                 case "Combattre":
-                    System.out.println("Indiquez le numero de la cible à attaquer.\nListe des creatures : " );
+                    System.out.println("\nIndiquez le numero de la cible à attaquer.\nListe des creatures : ");
                     visualiserPlateau();
                     int numeroCible = keyboard.nextInt();
                     Creature cible = this.listeCreatures.get(numeroCible);
-                    ((Combattant) perso).combattre(cible);
+                    if (perso instanceof Combattant) {
+                        ((Combattant) perso).combattre(cible);
+                    }
                     break;
                 case "Deplacer":
                     System.out.println("Veuillez vous déplacer.");
@@ -118,6 +119,47 @@ public class World {
                     }
                     break;
 
+                case "Sauvegarder":
+                    String path;
+                    System.out.println("Enregistrement de la partie...\n Souhaitez vous nommer la fichier de sauvegarde ?");
+                    String answer;
+                    File f;
+                    do {
+                        System.out.println("y/n");
+                        answer = keyboard.nextLine();
+                    } while (!answer.equals("y") && !answer.equals("n"));
+
+                    if (answer.equals("y")) {
+                        path = keyboard.nextLine();
+                        f = new File(path);
+                        while (f.isFile()) {
+
+                            System.out.println("Attention le fichier existe déjà ! Voulez-vous changer le nom du fichier à enregistrer ?");
+                            do {
+                                System.out.println("y/n");
+                                answer = keyboard.nextLine();
+                            } while (!answer.equals("y") && !answer.equals("n"));
+
+                            if (answer.equals("y")) {
+                                path = keyboard.nextLine();
+                                f = new File(path);
+                            } else {
+                                break;
+                            }
+                        }
+                    } else {
+                        path = "Sauvegarde-WoE.txt";
+                        f = new File(path);
+                        int i = 0;
+                        while (f.isFile()) { // On s'assure que le fichier n'existe pas
+                            path = "Sauvegarde-WoE_" + valueOf(i) + ".txt";
+                            i += 1;
+                        }
+                    }
+                    SauvegardePartie save = new SauvegardePartie(path);
+                    save.sauvegarderPartie(this);
+                    break;
+
                 case "Rien":
                     System.out.println("Vous passez votre tour.");
                     break;
@@ -133,7 +175,7 @@ public class World {
 
                 Personnage perso = joueur.getPerso();
 
-                if (c instanceof Combattant) {
+                if (c instanceof Combattant) { // Les combatants peuvent joueur, les Lapin ne feront rien
                     if (c.getPos().distance(perso.getPos()) == 1) {
                         ((Combattant) c).combattre(joueur.getPerso());
                     } else {
@@ -158,6 +200,12 @@ public class World {
         }
         this.listeObjets.removeIf(n -> n.isUsed() == true);
         System.out.println("Fin du tour de jeu !");
+        if (!listeJoueurs.get(0).getPerso().isVivant()) {
+            System.out.println("Vous avez succombé...");
+            indicator = 1;
+        }
+
+        return indicator;
     }
 
     /**
@@ -166,8 +214,6 @@ public class World {
      * peuvent pas se trouver à plus de cinq unités les uns des autres.
      */
     public void creeMondeAlea() {
-
-        Random generateurAleatoire = new Random();
         Loup unLoup;
 
         Point2D pos;
@@ -176,28 +222,36 @@ public class World {
         int pP;
         int dA;
         int ptPara;
-        int longueurListe = ThreadLocalRandom.current().nextInt(50, 100);
+        int longueurListe = ThreadLocalRandom.current().nextInt(1, 3);
         System.out.println(longueurListe);
-        for (int i = 0; i < longueurListe; i++) {
+        for (int i = 0; i < longueurListe; i++) { // Ajout de loups
             pos = creerPoint2DAlea();
             unLoup = new Loup(pos);
             listeCreatures.add(unLoup);
         }
         listeObjets = new ArrayList();
         Soin poposoin;
-        longueurListe = ThreadLocalRandom.current().nextInt(5, 10);
-        for (int i = 0; i < longueurListe; i++) {
-            pos = new Point2D(generateurAleatoire.nextInt(this.largeur), generateurAleatoire.nextInt(this.hauteur));
+        longueurListe = ThreadLocalRandom.current().nextInt(1, 3);
+        for (int i = 0; i < longueurListe; i++) { // Ajout des potions de soins
+            pos = creerPoint2DAlea();
             poposoin = new Soin(pos, ThreadLocalRandom.current().nextInt(10, 15));
             listeObjets.add(poposoin);
         }
 
         Mana popomana;
-        for (int i = 0; i < longueurListe; i++) {
-            pos = new Point2D(generateurAleatoire.nextInt(this.largeur), generateurAleatoire.nextInt(this.hauteur));
+        for (int i = 0; i < longueurListe; i++) { // Ajout des potions de mana
+            pos = creerPoint2DAlea();
             popomana = new Mana(pos, ThreadLocalRandom.current().nextInt(10, 15));
             listeObjets.add(popomana);
         }
+
+        NuageToxique nuage;
+        for (int i = 0; i < longueurListe; i++) { // Ajout des nuages toxiques
+            pos = creerPoint2DAlea();
+            nuage = new NuageToxique(pos);
+            listeObjets.add(nuage);
+        }
+
     }
 
     /**
@@ -254,15 +308,16 @@ public class World {
         }
         return estOccupee;
     }
+
     /**
-     * Renvoie une liste des créatures et leur positions de façon jolie et lisible.
+     * Renvoie une liste des créatures et leur positions de façon jolie et
+     * lisible.
      */
-    public void visualiserPlateau(){
+    public void visualiserPlateau() {
         for (Creature o : listeCreatures) {
             System.out.println(o);
         }
     }
-    
 
     public int getLargeur() {
         return largeur;
@@ -291,7 +346,5 @@ public class World {
     public ArrayList<Objet> getListeObjets() {
         return listeObjets;
     }
-    
-    
-    
+
 }

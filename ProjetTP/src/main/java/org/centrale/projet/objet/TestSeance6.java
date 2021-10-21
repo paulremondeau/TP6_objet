@@ -26,9 +26,10 @@ public class TestSeance6 {
         System.out.println("Nombre de créatures : "+ monde.listeCreatures.size());
         System.out.println("Nombre de potions : "+ monde.listeObjets.size());
         
-        monde.tourDeJeu();
-        
-        
-        
+        int indicator =0;
+        while(indicator==0){
+            indicator = monde.tourDeJeu();
+        }
+    
     }
 }

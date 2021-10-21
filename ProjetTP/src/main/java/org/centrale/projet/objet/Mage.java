@@ -90,5 +90,9 @@ public class Mage extends Personnage implements Combattant{
         } else {
             System.out.println("La cible n'est pas à portée !");
         }
+        
+        if (c.getPtVie()<0){
+            c.setVivant(false);
+        }    
     }
 }

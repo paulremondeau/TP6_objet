@@ -13,11 +13,7 @@ public class TestSauvegardeMonde {
     
     public static void main(String[] args){
         
-        World monde = new World();
-        monde.creeMondeAlea();
         
-        SauvegardePartie save = new SauvegardePartie();
-        save.enregistrerMonder(monde);
         
     }
     
