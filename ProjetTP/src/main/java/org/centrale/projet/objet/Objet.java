@@ -33,7 +33,7 @@ public abstract class Objet extends ElementDeJeu {
     }
     
     public void utiliser(Personnage p){
-        System.out.println("Utilisation de "+ this.getClass().getSimpleName() + "par " + p.getNom());
+        System.out.println("Utilisation de "+ this.getClass().getSimpleName() + " par " + p.getNom());
     }
 
     public boolean isUsed() {

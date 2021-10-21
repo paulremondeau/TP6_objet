@@ -9,12 +9,12 @@ package org.centrale.projet.objet;
  * Interface pour les déplacements.
  * @author remondeau
  */
-public interface Deplacable {
+public interface Deplacable{
     /**
      * Se déplace sur une case dont on spécifie les coordonnées.
      * @param x absisse où il faut se déplacer
      * @param y ordonnée où il faut se déplacer
      */
-    public void deplacer(int x, int y);
+    public void deplacer(World monde,int x, int y) throws DeplacementIncorrectException;
 
 }

@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Classe du monde généré.
@@ -49,12 +51,13 @@ public class World {
         this.listeCreatures = new ArrayList<>();
         this.listeJoueurs = new ArrayList<>();
         this.listeObjets = new ArrayList<>();
-        this.largeur = 100;
-        this.hauteur = 100;
+        this.largeur = 15;
+        this.hauteur = 15;
     }
 
     /**
-     * Implémente les tours de jeu.
+     * Implémente les tours de jeu. 
+     * L'objectif est d'éliminer toutes els créatures sans se faire tuer.
      */
     public int tourDeJeu() {
         int indicator = 0; // Si égal à 1, met fin à la partie.
@@ -79,91 +82,100 @@ public class World {
 
         for (Joueur joueur : this.listeJoueurs) {
 
-            Personnage perso = joueur.getPerso();
-
-            System.out.println("\nC'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + ". Que voulez-vous faire ? Combattre/Deplacer/Sauvegarder");
-            String action;
-
-            do {
-                action = keyboard.nextLine();
-            } while (!action.equals("Combattre") && !action.equals("Deplacer") && !action.equals("Rien") && !action.equals("Sauvegarder"));
-
-            switch (action) {
-
-                case "Combattre":
-                    System.out.println("\nIndiquez le numero de la cible à attaquer.\nListe des creatures : ");
-                    visualiserPlateau();
-                    int numeroCible = keyboard.nextInt();
-                    Creature cible = this.listeCreatures.get(numeroCible);
-                    if (perso instanceof Combattant) {
-                        ((Combattant) perso).combattre(cible);
-                    }
-                    break;
-                case "Deplacer":
-                    System.out.println("Veuillez vous déplacer.");
-                    int dx;
-                    int dy;
-                    Point2D destination = new Point2D(perso.getPos());
-                    do {
-                        dx = keyboard.nextInt();
-                        dy = keyboard.nextInt();
-                        destination.setPosition(destination.getX() + dx, destination.getY() + dy);
-                    } while (verifierPos(destination));
-
-                    perso.deplacer(dx, dy);
-                    for (Objet o : this.listeObjets) {
-                        if (o.getPos().equals(perso.getPos())) {
-                            o.utiliser(perso);
-                            o.setUsed(true);
+            try {
+                Personnage perso = joueur.getPerso();
+                
+                System.out.println("\nC'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos()+" avec une portée de "+perso.getDistAttMax()+" et "+perso.getPtVie()+" ptVie. Liste des creatures : ");
+                visualiserPlateau(joueur);
+                System.out.println("Que voulez-vous faire ? Combattre/Deplacer/Sauvegarder");
+                String action;
+                
+                do {
+                    action = keyboard.nextLine();
+                } while (!action.equals("Combattre") && !action.equals("Deplacer") && !action.equals("Rien") && !action.equals("Sauvegarder"));
+                
+                switch (action) {
+                    
+                    case "Combattre":
+                        System.out.println("\nIndiquez le numero de la cible à attaquer.\n");
+                        int numeroCible = keyboard.nextInt();
+                        Creature cible = this.listeCreatures.get(numeroCible);
+                        if (perso instanceof Combattant) {
+                            ((Combattant) perso).combattre(cible);
                         }
-                    }
-                    break;
-
-                case "Sauvegarder":
-                    String path;
-                    System.out.println("Enregistrement de la partie...\n Souhaitez vous nommer la fichier de sauvegarde ?");
-                    String answer;
-                    File f;
-                    do {
-                        System.out.println("y/n");
-                        answer = keyboard.nextLine();
-                    } while (!answer.equals("y") && !answer.equals("n"));
-
-                    if (answer.equals("y")) {
-                        path = keyboard.nextLine();
-                        f = new File(path);
-                        while (f.isFile()) {
-
-                            System.out.println("Attention le fichier existe déjà ! Voulez-vous changer le nom du fichier à enregistrer ?");
-                            do {
-                                System.out.println("y/n");
-                                answer = keyboard.nextLine();
-                            } while (!answer.equals("y") && !answer.equals("n"));
-
-                            if (answer.equals("y")) {
-                                path = keyboard.nextLine();
-                                f = new File(path);
-                            } else {
-                                break;
+                        this.listeCreatures.removeIf(n -> n.isVivant() == false);
+                        break;
+                    case "Deplacer":
+                        System.out.println("Veuillez vous déplacer.");
+                        int dx;
+                        int dy;
+                        Point2D destination = new Point2D(perso.getPos());
+                        do {
+                            System.out.println("x ?");
+                            dx = keyboard.nextInt();
+                            System.out.println("y ?");
+                            dy = keyboard.nextInt();
+                            destination.setPosition(destination.getX() + dx, destination.getY() + dy);
+                        } while (estLibre(destination));
+                        
+                        ((Creature)perso).deplacer(this,dx, dy);
+                        for (Objet o : this.listeObjets) {
+                            if (o.getPos().equals(perso.getPos())) {
+                                o.utiliser(perso);
+                                o.setUsed(true);
                             }
                         }
-                    } else {
-                        path = "Sauvegarde-WoE.txt";
-                        f = new File(path);
-                        int i = 0;
-                        while (f.isFile()) { // On s'assure que le fichier n'existe pas
-                            path = "Sauvegarde-WoE_" + valueOf(i) + ".txt";
-                            i += 1;
+                        break;
+                        
+                    case "Sauvegarder":
+                        indicator =1; // On met fin à la partie après la sauvegarde
+                        String path;
+                        System.out.println("Enregistrement de la partie...\n Souhaitez vous nommer la fichier de sauvegarde ?");
+                        String answer;
+                        File f;
+                        do {
+                            System.out.println("y/n");
+                            answer = keyboard.nextLine();
+                        } while (!answer.equals("y") && !answer.equals("n"));
+                        
+                        if (answer.equals("y")) {
+                            path = keyboard.nextLine();
+                            f = new File(path);
+                            while (f.isFile()) {
+                                
+                                System.out.println("Attention le fichier existe déjà ! Voulez-vous changer le nom du fichier à enregistrer ?");
+                                do {
+                                    System.out.println("y/n");
+                                    answer = keyboard.nextLine();
+                                } while (!answer.equals("y") && !answer.equals("n"));
+                                
+                                if (answer.equals("y")) {
+                                    path = keyboard.nextLine();
+                                    f = new File(path);
+                                } else {
+                                    break;
+                                }
+                            }
+                        } else {
+                            path = "Sauvegarde-WoE.txt";
+                            f = new File(path);
+                            int i = 0;
+                            while (f.isFile()) { // On s'assure que le fichier n'existe pas
+                                path = "Sauvegarde-WoE_" + valueOf(i) + ".txt";
+                                i += 1;
+                            }
                         }
-                    }
-                    SauvegardePartie save = new SauvegardePartie(path);
-                    save.sauvegarderPartie(this);
-                    break;
-
-                case "Rien":
-                    System.out.println("Vous passez votre tour.");
-                    break;
-
+                        SauvegardePartie save = new SauvegardePartie(path);
+                        save.sauvegarderPartie(this);
+                        break;
+                        
+                    case "Rien":
+                        System.out.println("Vous passez votre tour.");
+                        break;
+                        
+                }
+            } catch (DeplacementIncorrectException ex) {
+                
             }
         }
 
@@ -177,6 +189,7 @@ public class World {
 
                 if (c instanceof Combattant) { // Les combatants peuvent joueur, les Lapin ne feront rien
                     if (c.getPos().distance(perso.getPos()) == 1) {
+                        System.out.println(c.getClass().getSimpleName()+" vous attaque !!");
                         ((Combattant) c).combattre(joueur.getPerso());
                     } else {
                         outer:
@@ -184,10 +197,15 @@ public class World {
                             for (int y = -1; y < 2; y++) {
                                 nextPos.setPosition(c.getPos().getX() + x, y + c.getPos().getY());
                                 if (nextPos.distance(perso.getPos()) < c.getPos().distance(perso.getPos())) {
-                                    if (verifierPos(nextPos)) {
-                                        c.deplacer(x, y);
-                                        break outer;
-                                    }
+                                    if (estLibre(nextPos)) {
+                                        try {
+                                            c.deplacer(this,x, y);
+                                            System.out.println(c.getClass().getSimpleName()+" se déplace vers vous");
+                                            break outer;
+                                        } catch (DeplacementIncorrectException ex) {
+                                            
+                                        }
+                                    }else{System.out.println("La case n'est pas libre...");}
 
                                 }
                             }
@@ -198,8 +216,13 @@ public class World {
             }
 
         }
+        
         this.listeObjets.removeIf(n -> n.isUsed() == true);
         System.out.println("Fin du tour de jeu !");
+        if (listeCreatures.isEmpty()){
+            System.out.println("Vous avez gagné ! ");
+            indicator = 1;
+        }
         if (!listeJoueurs.get(0).getPerso().isVivant()) {
             System.out.println("Vous avez succombé...");
             indicator = 1;
@@ -222,7 +245,7 @@ public class World {
         int pP;
         int dA;
         int ptPara;
-        int longueurListe = ThreadLocalRandom.current().nextInt(1, 3);
+        int longueurListe = ThreadLocalRandom.current().nextInt(2, 4);
         System.out.println(longueurListe);
         for (int i = 0; i < longueurListe; i++) { // Ajout de loups
             pos = creerPoint2DAlea();
@@ -269,7 +292,7 @@ public class World {
     }
 
     /**
-     * Créer un point2d aléatoirement dans le monde.
+     * Créer un point2d aléatoirement dans le monde sur une case disponible.
      *
      * @return
      */
@@ -285,7 +308,7 @@ public class World {
             x = generateurAleatoire.nextInt(this.largeur);
             y = generateurAleatoire.nextInt(this.hauteur);
             pos = new Point2D(x, y);
-            estOccupee = verifierPos(pos);
+            estOccupee = !estLibre(pos);
 
         } while (estOccupee);
 
@@ -296,26 +319,26 @@ public class World {
      * Vérifie si une position est libre.
      *
      * @param pos La position en question
-     * @return true si la position n'est pas occupée
+     * @return true si la position est libre
      */
-    public boolean verifierPos(Point2D pos) {
-        boolean estOccupee = false;
+    public boolean estLibre(Point2D pos) {
+        boolean res = true;
         for (Creature o : listeCreatures) {
             if (o.getPos().equals(pos)) {
-                estOccupee = true;
+                res = false;
                 break;
             }
         }
-        return estOccupee;
+        return res;
     }
 
     /**
      * Renvoie une liste des créatures et leur positions de façon jolie et
      * lisible.
      */
-    public void visualiserPlateau() {
+    public void visualiserPlateau(Joueur j) {
         for (Creature o : listeCreatures) {
-            System.out.println(o);
+            System.out.println(o+" et à une distance de "+j.getPerso().getPos().distance(o.getPos())+".");
         }
     }
 

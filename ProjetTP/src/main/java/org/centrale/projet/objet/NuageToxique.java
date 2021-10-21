@@ -119,14 +119,15 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
      * @param y 
      */
     @Override
-    public void deplacer(int x, int y) {
+    public void deplacer(World monde,int x, int y) throws DeplacementIncorrectException{
         
-        if(x>1 || x<-1 || y>1 || y<-1){
-            System.out.println("Déplacement non valide");
+        if(x>1 || x<-1 || y>1 || y<-1 || getPos().getX()-x==0 || getPos().getX()+x==monde.getLargeur() || getPos().getY()-y==0 || getPos().getY()+y==monde.getHauteur()){
+            throw new DeplacementIncorrectException("Déplacement non valide");
         }
-        else{
-            this.getPos().translate(x,y);
+        else{  
+            getPos().translate(x,y);
         }
+        
     }
     
     public void affiche(){

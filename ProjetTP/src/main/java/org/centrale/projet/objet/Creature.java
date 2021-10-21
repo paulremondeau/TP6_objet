@@ -5,6 +5,7 @@
  */
 package org.centrale.projet.objet;
 
+
 /**
  * Classe des créatures.
  * @author bodet
@@ -142,12 +143,12 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
      * @param x le déplacement voulu selon l'axe X
      * @param y le déplacement voulu selon l'axe Y
      */    
-    public void deplacer(int x, int y) {
+    public void deplacer(World monde,int x, int y) throws DeplacementIncorrectException{
         
-        if(x>1 || x<-1 || y>1 || y<-1){
-            System.out.println("Déplacement non valide");
+        if(x>1 || x<-1 || y>1 || y<-1 || pos.getX()-x==0 || pos.getX()+x==monde.getLargeur() || pos.getY()-y==0 || pos.getY()+y==monde.getHauteur()){
+            throw new DeplacementIncorrectException("Déplacement non valide");
         }
-        else{
+        else{  
             this.pos.translate(x,y);
         }
         
@@ -163,7 +164,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     public String toString(){
         
         String res = "";
-        res += this.getClass().getSimpleName() + " est à la position " + this.pos.toString();
+        res += this.getClass().getSimpleName() + " est à la position " + this.pos.toString() + " avec "+ this.ptVie+" ptVie";
         
         return res;
     }

@@ -46,13 +46,13 @@ public class Archer extends Personnage implements Combattant{
     
         this.nbFleches = ThreadLocalRandom.current().nextInt(20,30);
         this.setPtVie(ThreadLocalRandom.current().nextInt(40,50));
-        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(30,40));
+        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(80,90));
         this.setPourcentagePar(ThreadLocalRandom.current().nextInt(20,30));
         this.setPourcentageMag(ThreadLocalRandom.current().nextInt(10,20));
         this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(30,35));
         this.setDegAtt(ThreadLocalRandom.current().nextInt(15,25));
         this.setDegMag(ThreadLocalRandom.current().nextInt(1,5));
-        this.setDistAttMax(ThreadLocalRandom.current().nextInt(20,30));
+        this.setDistAttMax(ThreadLocalRandom.current().nextInt(5,10));
         this.setPtPar(ThreadLocalRandom.current().nextInt(20,30));    
     }
     

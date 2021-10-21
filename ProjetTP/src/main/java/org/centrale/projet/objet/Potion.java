@@ -34,16 +34,6 @@ public abstract class Potion extends Objet{
         return puissance;
     }
     
-    @Override
-    /**
-     * Utiliser une potion.
-     * @param p Personnage qui boit la potion
-     */
-    public void utiliser(Personnage p){
-        super.utiliser(p);
-        System.out.println("La potion est utilisée ! ");
-    }
-    
     public void affiche(){
         super.affiche();
         System.out.println("Elle possède une puissance de "+this.puissance+".");
