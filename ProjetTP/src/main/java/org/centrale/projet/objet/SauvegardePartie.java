@@ -112,6 +112,22 @@ public class SauvegardePartie {
                         fichier.newLine();
                         break;
                     }
+                    case "BonusPtPar" -> {
+                        this.fichier.write("BonusPtPar ");
+                        fichier.write(((Nourriture) o).getPuissance() + " ");
+                        fichier.write(((Nourriture) o).getDuree() + " ");
+                        fichier.write(((Nourriture) o).getPos().getX() + " ");
+                        fichier.write(((Nourriture) o).getPos().getY() + " ");
+                        fichier.newLine();
+                    }
+                    case "MalusDegAtt" -> {
+                        this.fichier.write("MalusDegAtt ");
+                        fichier.write(((Nourriture) o).getPuissance() + " ");
+                        fichier.write(((Nourriture) o).getDuree() + " ");
+                        fichier.write(((Nourriture) o).getPos().getX() + " ");
+                        fichier.write(((Nourriture) o).getPos().getY() + " ");
+                        fichier.newLine();
+                    }
                 }
             }
 

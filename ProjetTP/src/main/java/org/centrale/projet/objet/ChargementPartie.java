@@ -132,6 +132,22 @@ public class ChargementPartie {
                 monde.getListeObjets().add(unePotionMana);
                 break;
             }
+            case "BonusPtPar" -> {
+                int puissance = Integer.parseInt(ligneListe.get(1));
+                int duree = Integer.parseInt(ligneListe.get(2));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(5)), Integer.parseInt(ligneListe.get(6)));  
+                BonusPtPar unBonusPtPar = new BonusPtPar(pos,puissance,duree);
+                monde.getListeObjets().add(unBonusPtPar);
+                break;
+            }
+            case "MalusDegAtt" -> {
+                int puissance = Integer.parseInt(ligneListe.get(1));
+                int duree = Integer.parseInt(ligneListe.get(2));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(5)), Integer.parseInt(ligneListe.get(6)));
+                MalusDegAtt unMalusDegAtt = new MalusDegAtt(pos,puissance,duree);
+                monde.getListeObjets().add(unMalusDegAtt);
+                break;
+            }
             case "NuageToxique" -> {
                 int pourcentageAtt = Integer.parseInt(ligneListe.get(1));
                 int pourcentagePar = Integer.parseInt(ligneListe.get(2));

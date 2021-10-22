@@ -57,8 +57,8 @@ public class World {
     }
 
     /**
-     * Implémente les tours de jeu.
-     * L'objectif est d'éliminer toutes les créatures sans se faire tuer.
+     * Implémente les tours de jeu. L'objectif est d'éliminer toutes les
+     * créatures sans se faire tuer.
      *
      * @return si 1, met fin à la partie
      */
@@ -148,11 +148,13 @@ public class World {
 
         for (Creature c : this.listeCreatures) {
 
-            for (Joueur joueur : this.listeJoueurs) {
+            if (c instanceof Combattant) {
 
-                Personnage perso = joueur.getPerso();
+                for (Joueur joueur : this.listeJoueurs) {
 
-                if (c instanceof Combattant) { // Les combatants peuvent joueur, les Lapin ne feront rien
+                    Personnage perso = joueur.getPerso();
+
+                    // Les combatants peuvent joueur, les Lapin ne feront rien
                     if (c.getPos().distance(perso.getPos()) == 1) {
                         System.out.println("    -" + c.getClass().getSimpleName() + " vous attaque !!");
                         ((Combattant) c).combattre(joueur.getPerso());
@@ -293,17 +295,15 @@ public class World {
             nuage = new NuageToxique(pos);
             listeObjets.add(nuage);
         }
-        
+
         pos = creerPoint2DAlea();
-        BonusPtPar bonusPtPar = new BonusPtPar(pos,10,3);
-        
+        BonusPtPar bonusPtPar = new BonusPtPar(pos, 10, 3);
+
         pos = creerPoint2DAlea();
-        MalusDegAtt malusDegAtt = new MalusDegAtt(pos,10,3);
-        
+        MalusDegAtt malusDegAtt = new MalusDegAtt(pos, 10, 3);
+
         listeObjets.add(bonusPtPar);
         listeObjets.add(malusDegAtt);
-        
-        
 
         System.out.println("\nBienvenue dans l'interface de création des personnages.");
         if (nJoueurs == 1) {
@@ -385,29 +385,32 @@ public class World {
 
     /**
      * Affiche de manière lisible le plateau de jeu
+     *
      * @param j Joueur par rapport auquel on affiche les distances.
      */
-    public void visualiserPlateau(Joueur j){
-        
+    public void visualiserPlateau(Joueur j) {
+
         System.out.println("Liste des créatures :");
         visualiserPlateauCrature(j);
-        
+
         System.out.println("Liste des objets :");
         visualiserPlateauObjets(j);
     }
-    
+
     /**
      * Affiche de manière lisible la liste des objets du monde.
+     *
      * @param j Joueur par rapport auquel on affiche les distances.
      */
-    public void visualiserPlateauObjets(Joueur j){
+    public void visualiserPlateauObjets(Joueur j) {
         for (Objet o : listeObjets) {
             System.out.println("    - " + o);
         }
     }
-    
+
     /**
      * Affiche de manière lisible la liste des créatures du monde.
+     *
      * @param j Joueur par rapport auquel on affiche les distances.
      */
     public void visualiserPlateauCrature(Joueur j) {
