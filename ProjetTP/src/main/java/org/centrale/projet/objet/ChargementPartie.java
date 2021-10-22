@@ -11,6 +11,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Charge un fichier de sauvegarde et retourne un objet de type World.
@@ -37,27 +39,43 @@ public class ChargementPartie {
      * @throws FileNotFoundException Le fichier n'existe pas.
      * @throws IOException Erreur de lecture.
      */
-    public World chargerPartie() throws FileNotFoundException, IOException {
-        World mondeCharge = new World();
-        String ligne;
-        ArrayList<String> ligneListe;
-        
+    public World chargerPartie(){
         try{
-            this.fichier = new BufferedReader(new FileReader(this.source));
-        }
-        catch(FileNotFoundException e){
-        }
-        
-        ligne = this.fichier.readLine();
-        // Parcours des lignes
-        while (ligne != null) {
-            ligneListe = ligneAListe(ligne); // Transforme la ligne en liste
-            creerElementJeu(ligneListe, mondeCharge); // Ajoute l'élément de jeu
+            System.out.println("Chargement de la partie contenue dans le fichier "+this.source+" ...");
+            World mondeCharge = new World();
+            String ligne;
+            ArrayList<String> ligneListe;
+            
+            try{
+                this.fichier = new BufferedReader(new FileReader(this.source));
+            }
+            catch(FileNotFoundException e){
+            }
+            
             ligne = this.fichier.readLine();
+            // Parcours des lignes
+            while (ligne != null) {
+                ligneListe = ligneAListe(ligne); // Transforme la ligne en liste
+                creerElementJeu(ligneListe, mondeCharge); // Ajoute l'élément de jeu
+                ligne = this.fichier.readLine();
+            }
+            fichier.close();
+            System.out.println("Chargement réussi !");
+            String message = "Les aventures de ";
+            for (Joueur j: mondeCharge.getListeJoueurs()){
+                message += j.getPerso().getNom() + ", ";
+            }
+            message = message.substring(0, message.length()-2);
+            message += " vont pouvoir continuer !";
+            System.out.println(message);
+            return mondeCharge;
         }
-        fichier.close();
+        catch(IOException ex){
+            Logger.getLogger(ChargementPartie.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        return mondeCharge;
+        return null;
+        
     }
     
     /**
@@ -86,7 +104,7 @@ public class ChargementPartie {
                 int ptPara = Integer.parseInt(ligneListe.get(5));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(6)), Integer.parseInt(ligneListe.get(7)));
                 Loup unLoup = new Loup(pV, pA, pP, dA, pos, ptPara, true);
-                monde.listeCreatures.add(unLoup);
+                monde.getListeCreatures().add(unLoup);
                 break;
             }
             case "Lapin" -> {
@@ -97,21 +115,21 @@ public class ChargementPartie {
                 int ptPara = Integer.parseInt(ligneListe.get(5));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(6)), Integer.parseInt(ligneListe.get(7)));
                 Lapin unLapin = new Lapin(pV, pA, pP, dA, pos, ptPara, true);
-                monde.listeCreatures.add(unLapin);
+                monde.getListeCreatures().add(unLapin);
                 break;
             }
             case "Soin" -> {
                 int puissance = Integer.parseInt(ligneListe.get(1));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(2)), Integer.parseInt(ligneListe.get(3)));
                 Soin unePotionSoin = new Soin(pos, puissance);
-                monde.listeObjets.add(unePotionSoin);
+                monde.getListeObjets().add(unePotionSoin);
                 break;
             }
             case "Mana" -> {
                 int puissance = Integer.parseInt(ligneListe.get(1));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(2)), Integer.parseInt(ligneListe.get(3)));
                 Mana unePotionMana = new Mana(pos, puissance);
-                monde.listeObjets.add(unePotionMana);
+                monde.getListeObjets().add(unePotionMana);
                 break;
             }
             case "NuageToxique" -> {
@@ -122,7 +140,7 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(5)), Integer.parseInt(ligneListe.get(6)));
                 
                 NuageToxique unNuageToxique = new NuageToxique(pos, pourcentageAtt, pourcentagePar, degAtt, ptPar);
-                monde.listeObjets.add(unNuageToxique);
+                monde.getListeObjets().add(unNuageToxique);
                 break;
             }
             case "Guerrier" -> {
@@ -136,7 +154,7 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
                  
                 Guerrier unGuerrier = new Guerrier(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
-                monde.listeCreatures.add(unGuerrier);
+                monde.getListeCreatures().add(unGuerrier);
                 break;
             }
             case "Mage" -> {
@@ -154,7 +172,7 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
                  
                 Mage unmage = new Mage(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara, true);
-                monde.listeCreatures.add(unmage);
+                monde.getListeCreatures().add(unmage);
                 break;
             }
             case "Voleur" -> {
@@ -168,7 +186,7 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
                  
                 Voleur unVoleur = new Voleur(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
-                monde.listeCreatures.add(unVoleur);
+                monde.getListeCreatures().add(unVoleur);
             }
             case "Archer" -> {
                 String nom = ligneListe.get(1);
@@ -183,7 +201,7 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
                 
                 Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, nbF, ptPara, true);  
-                monde.listeCreatures.add(unArcher);
+                monde.getListeCreatures().add(unArcher);
                 break;
             }
             case "Paysan" -> {
@@ -195,7 +213,7 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
                  
                 Paysan unPaysan = new Paysan(nom, pV, pP, distMax, pos, ptPara, true);
-                monde.listeCreatures.add(unPaysan);
+                monde.getListeCreatures().add(unPaysan);
             }
             case "Joueur" -> {
                 String nom = ligneListe.get(2);
@@ -241,7 +259,7 @@ public class ChargementPartie {
                         break;
                     }
                 }
-                monde.listeJoueurs.add(leJoueur);
+                monde.getListeJoueurs().add(leJoueur);
             }
         }
     }

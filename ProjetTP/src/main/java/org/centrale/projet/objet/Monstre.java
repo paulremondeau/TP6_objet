@@ -34,6 +34,10 @@ public abstract class Monstre extends Creature{
         super(m);
     }
     
+    /**
+     * Constructeur aléatoire.
+     * @param pos Position du monstre crée.
+     */
     public Monstre(Point2D pos){
         super(pos);
     }
@@ -46,7 +50,7 @@ public abstract class Monstre extends Creature{
     }
 
     /**
-     * Affiche les informations du monstre
+     * Affiche les informations du monstre.
      */
     @Override
     public void affiche(){

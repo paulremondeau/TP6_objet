@@ -5,10 +5,6 @@
  */
 package org.centrale.projet.objet;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-
 /**
  * Position dans une grille en deux dimensions. 
  * @author bodet
@@ -80,6 +76,11 @@ public class Point2D {
         return res;
     }
     
+    /**
+     * Vérifie si deux Point2D sont égaux.
+     * @param p Point2D cible
+     * @return true si les deux sont égaux.
+     */
     public boolean equals(Point2D p){
         
         return ( (this.x == p.getX()) && this.y == p.getY());

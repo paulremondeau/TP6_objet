@@ -32,6 +32,10 @@ public abstract class Objet extends ElementDeJeu {
         this.pos = new Point2D(pos);
     }
     
+    /**
+     * Utilisation d'un objet.
+     * @param p Personnage cible
+     */
     public void utiliser(Personnage p){
         System.out.println("Utilisation de "+ this.getClass().getSimpleName() + " par " + p.getNom());
     }
@@ -45,9 +49,22 @@ public abstract class Objet extends ElementDeJeu {
     }
     
     /**
-     * Affichage de l'objet
+     * Affichage des informations de l'objet.
      */
     public void affiche(){
         System.out.println("L'objet " + this.getClass().getSimpleName()+ " est situé en " + this.pos + ".");
+    }
+    
+    /**
+     * Affiche un résumé des informations de l'objet pour tenir sur une ligne.
+     * @return Les informations
+     */
+    @Override
+    public String toString(){
+        
+        String res = "";
+        res += this.getClass().getSimpleName() + " est à la position " + this.pos.toString()+".";
+        
+        return res;
     }
 }

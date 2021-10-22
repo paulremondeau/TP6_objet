@@ -66,14 +66,14 @@ public class Guerrier extends Personnage implements Combattant{
     
     
     /**
-     * Méthode combattre du guerrier
-     *
+     * Méthode combattre du guerrier.
+     * Le guerrier ne peut combattre que au corps à corps.
      * @param c Cible de l'attaque
      */
     @Override
     public void combattre(Creature c) {
 
-        if (this.getPos().distance(c.getPos()) == 1) { // Si la cible est au cac et qu'on a au moins un point de mana
+        if (this.getPos().distance(c.getPos()) == 1) { 
             Random generateurAleatoire = new Random();
             int jetGuerrier = generateurAleatoire.nextInt(100);
             if (jetGuerrier <= this.getPourcentageAtt()) {

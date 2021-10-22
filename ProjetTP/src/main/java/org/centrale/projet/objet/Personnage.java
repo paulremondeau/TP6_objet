@@ -65,6 +65,11 @@ public abstract class Personnage extends Creature{
         this.listeNourriture = new ArrayList();
     }
     
+    /**
+     * Constructeur aléatoire.
+     * @param nom Nom du personnage.
+     * @param pos Position du personnage.
+     */
     public Personnage(String nom,Point2D pos){
         super(pos);
         this.nom = nom;
@@ -72,7 +77,7 @@ public abstract class Personnage extends Creature{
     }
 
     /**
-     * Constructeur par défaut
+     * Constructeur par défaut.
      */
     public Personnage() {
     super();
@@ -129,20 +134,7 @@ public abstract class Personnage extends Creature{
     public ArrayList<Nourriture> getListeNourriture() {
         return listeNourriture;
     }
-    
-    
-    
-    /**
-     * Teste si le personnage se situe sur une potion, il l'utilise et le détruit si c'est le cas. 
-     * @param p Potion testée.
-     */
-    public void testPotion(Potion p) {
-        if (this.getPos().equals(p.getPos())) {
-            p.utiliser(this);
-            p=null; // Supprimer la référence à la potion
-            System.gc(); // Appel explicite au garbage collector, supprime l'objet non référencé
-        }
-    }
+
     
     /**
      * Affiche les différentes informations du personnage.

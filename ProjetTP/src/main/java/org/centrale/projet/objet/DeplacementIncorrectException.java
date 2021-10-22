@@ -6,11 +6,15 @@
 package org.centrale.projet.objet;
 
 /**
- *
+ * Exception d'erreur de déplacement
  * @author remondeau
  */
 public class DeplacementIncorrectException extends Exception{
     
+    /**
+     * Constructeur de l'objet.
+     * @param errorMessage 
+     */
     public DeplacementIncorrectException(String errorMessage) {
         super(errorMessage);
     }

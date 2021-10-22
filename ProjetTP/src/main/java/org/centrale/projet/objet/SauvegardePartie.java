@@ -25,12 +25,15 @@ public class SauvegardePartie {
     private BufferedWriter fichier;
 
     /**
-     * Constructeur de la classe, qui initialise le chemin du fichier et le BufferedWriter.
+     * Constructeur de la classe, qui initialise le chemin du fichier et le
+     * BufferedWriter.
+     *
      * @param path Chemin du fichier de sauvegarde
      */
     public SauvegardePartie(String path) {
+        this.source = path;
         try {
-            fichier = new BufferedWriter (new OutputStreamWriter(new FileOutputStream(source), StandardCharsets.UTF_8));
+            fichier = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(source), StandardCharsets.UTF_8));
 
         } catch (IOException ex) {
             Logger.getLogger(SauvegardePartie.class.getName()).log(Level.SEVERE, null, ex);
@@ -39,6 +42,7 @@ public class SauvegardePartie {
 
     /**
      * Sauvegarde une partie dans un fichier text.
+     *
      * @param monde Le monde que l'on sauvegarde
      */
     public void sauvegarderPartie(World monde) {
@@ -63,7 +67,7 @@ public class SauvegardePartie {
                             fichier.write(((Monstre) p).getDegAtt() + " ");
                             fichier.write(((Monstre) p).getPtPar() + " ");
                             fichier.write(((Monstre) p).getPos().getX() + " ");
-                            fichier.write(((Monstre) p).getPos().getY()+" ");
+                            fichier.write(((Monstre) p).getPos().getY() + " ");
                             fichier.newLine();
                             break;
                         }
@@ -76,7 +80,7 @@ public class SauvegardePartie {
                             fichier.write(((Monstre) p).getDegAtt() + " ");
                             fichier.write(((Monstre) p).getPtPar() + " ");
                             fichier.write(((Monstre) p).getPos().getX() + " ");
-                            fichier.write(((Monstre) p).getPos().getY() +" ");
+                            fichier.write(((Monstre) p).getPos().getY() + " ");
                             fichier.newLine();
                             break;
                         }
@@ -88,12 +92,12 @@ public class SauvegardePartie {
             for (Objet o : monde.getListeObjets()) {
                 switch (o.getClass().getSimpleName()) {
                     case "Soin" -> {
-                        this.fichier.write("Soin " + ((Potion) o).getPuissance() + " " + o.getPos().getX() +" "+ o.getPos().getY());
+                        this.fichier.write("Soin " + ((Potion) o).getPuissance() + " " + o.getPos().getX() + " " + o.getPos().getY());
                         fichier.newLine();
                         break;
                     }
                     case "Mana" -> {
-                        this.fichier.write("Mana " + ((Potion) o).getPuissance() + " " + o.getPos().getX() +" "+o.getPos().getY());
+                        this.fichier.write("Mana " + ((Potion) o).getPuissance() + " " + o.getPos().getX() + " " + o.getPos().getY());
                         fichier.newLine();
                         break;
                     }
@@ -104,7 +108,7 @@ public class SauvegardePartie {
                         fichier.write(((NuageToxique) o).getDegAtt() + " ");
                         fichier.write(((NuageToxique) o).getPtPar() + " ");
                         fichier.write(((NuageToxique) o).getPos().getX() + " ");
-                        fichier.write(((NuageToxique) o).getPos().getY()+" ");
+                        fichier.write(((NuageToxique) o).getPos().getY() + " ");
                         fichier.newLine();
                         break;
                     }
@@ -136,8 +140,9 @@ public class SauvegardePartie {
 
     /**
      * Enregistre un personnage dans le fichier de sauvegarde
+     *
      * @param p Le personnage que l'on enregistre.
-     * @throws IOException 
+     * @throws IOException
      */
     public void enregistrerPersonnage(Personnage p) throws IOException {
         switch (p.getClass().getSimpleName()) {
@@ -154,7 +159,7 @@ public class SauvegardePartie {
                 fichier.write(p.getDistAttMax() + " ");
                 fichier.write(p.getPtPar() + " ");
                 fichier.write(p.getPos().getX() + " ");
-                fichier.write(p.getPos().getY()+" ");
+                fichier.write(p.getPos().getY() + " ");
                 fichier.newLine();
                 break;
             }
@@ -172,7 +177,7 @@ public class SauvegardePartie {
                 fichier.write(p.getPtPar() + " ");
                 fichier.write(((Archer) p).getNbFleches() + " ");
                 fichier.write(p.getPos().getX() + " ");
-                fichier.write(p.getPos().getY()+" ");
+                fichier.write(p.getPos().getY() + " ");
                 fichier.newLine();
                 break;
             }
@@ -189,7 +194,7 @@ public class SauvegardePartie {
                 fichier.write(p.getDistAttMax() + " ");
                 fichier.write(p.getPtPar() + " ");
                 fichier.write(p.getPos().getX() + " ");
-                fichier.write(p.getPos().getY()+" ");
+                fichier.write(p.getPos().getY() + " ");
                 fichier.newLine();
                 break;
             }
@@ -206,7 +211,7 @@ public class SauvegardePartie {
                 fichier.write(p.getDistAttMax() + " ");
                 fichier.write(p.getPtPar() + " ");
                 fichier.write(p.getPos().getX() + " ");
-                fichier.write(p.getPos().getY()+" ");
+                fichier.write(p.getPos().getY() + " ");
                 fichier.newLine();
                 break;
             }

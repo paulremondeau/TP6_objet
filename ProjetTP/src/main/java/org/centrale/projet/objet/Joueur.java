@@ -16,12 +16,17 @@ public class Joueur {
      */
     private Personnage perso;
 
+    /**
+     * Constructeur d'un joueur en lui attribuant directement un personnage.
+     * @param perso Le personnag du joueur.
+     */
     public Joueur(Personnage perso){
         this.perso = perso;
     }
     
     /**
-     * Constructeur du joueur
+     * Constructeur d'un joueur en stipulant uniquement une position de départ.
+     * Le personnage sera alors créer aléatoirement.
      * @param pos Position du joueur à la création de son personnage.
      */
     public Joueur(Point2D pos){
@@ -29,7 +34,6 @@ public class Joueur {
         String classe;
         
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Bienvenue dans World of ECN !\nQuelle classe souhaitait-vous incarner ?");
         do{
             System.out.println("Veuillez choisir entre Guerrier, Mage, Archer et Paysan.");
             classe= keyboard.nextLine();
@@ -59,7 +63,7 @@ public class Joueur {
                 
          }
         
-       System.out.println("\n"+nom+" est créé !");
+       System.out.println(nom+" est prêt à se battre!");
         
     }
     

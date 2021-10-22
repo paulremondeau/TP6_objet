@@ -9,7 +9,7 @@ package org.centrale.projet.objet;
  * La classe des nourritures du jeu.
  * @author remondeau
  */
-public abstract class Nourriture extends Object {
+public abstract class Nourriture extends Objet {
     
     private int puissance;
     private int duree;
@@ -19,15 +19,26 @@ public abstract class Nourriture extends Object {
      * @param carac la caractéristique qui sera modifiée
      * @param puissance la valeur du bonus/valus que procure la nourriture
      */
-    public Nourriture(int puissance,int duree) {
+    public Nourriture(Point2D pos,int puissance,int duree) {
+        super(pos);
         this.puissance = puissance;
         this.duree = duree;
     }
     
+    /**
+     * Utilisation de la nourriture.
+     * Lorsqu'un nourriture est utilisée, elle est ajouté à la liste de nourritures du personnage.
+     * @param p Personnage cible
+     */
     public void utiliser(Personnage p){
         p.getListeNourriture().add(this);
     }
     
+    /**
+     * Méthode abstraite de fin d'une nourriture.
+     * Lorsque la durée atteint 0, il faudra retirer les effets de la nourriture et la retiré de la liste des nourritures du personnage.
+     * @param p Personnage cible
+     */
     public abstract void fin(Personnage p);
 
     public int getPuissance() {

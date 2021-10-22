@@ -80,7 +80,7 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
     }
     
     /**
-     * Combat du nuage
+     * Méthode combattre du nuage toxique.
      * @param c Créature ciblée
      */
     @Override
@@ -130,6 +130,9 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
         
     }
     
+    /**
+     * Affichage des informations concernant le nuage toxique.
+     */
     public void affiche(){
         super.affiche();
         System.out.println("Le nuage toxique a un pourcentage d'attaque de "+ this.pourcentageAtt +"%.");

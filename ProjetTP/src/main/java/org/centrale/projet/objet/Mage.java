@@ -56,7 +56,7 @@ public class Mage extends Personnage implements Combattant{
         this.setPtVie(ThreadLocalRandom.current().nextInt(25,30));
         this.setPtMana(ThreadLocalRandom.current().nextInt(70,80));
         this.setPourcentagePar(ThreadLocalRandom.current().nextInt(10,15));
-        this.setPourcentageMag(ThreadLocalRandom.current().nextInt(50,65));
+        this.setPourcentageMag(ThreadLocalRandom.current().nextInt(80,90));
         this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(70,80));
         this.setDegMag(ThreadLocalRandom.current().nextInt(60,70));
         this.setDistAttMax(ThreadLocalRandom.current().nextInt(10,15));
@@ -70,14 +70,15 @@ public class Mage extends Personnage implements Combattant{
     }
 
     /**
-     * Méthode combatre du mage
-     *
+     * Méthode combattre du mage.
+     * Le mage ne peut pas attaquer au delà de sa distance d'attaque. 
+     * Il a également besoin d'au moins un point de mana.
      * @param c Cible de l'attaque
      */
     @Override
     public void combattre(Creature c) {
 
-        if (this.getPos().distance(c.getPos()) >= 1 && this.getPos().distance(c.getPos()) < this.getDistAttMax() && this.getPtMana() >= 1) { // Si la cible est au cac et qu'on a au moins un point de mana
+        if (this.getPos().distance(c.getPos()) >= 1 && this.getPos().distance(c.getPos()) <= this.getDistAttMax() && this.getPtMana() >= 1) { // Si la cible est au cac et qu'on a au moins un point de mana
             Random generateurAleatoire = new Random();
             int jetArcher = generateurAleatoire.nextInt(100);
             this.setPtMana(this.getPtMana() - 1); // On retire un point de mana

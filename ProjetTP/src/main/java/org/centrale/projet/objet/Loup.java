@@ -52,8 +52,8 @@ public class Loup extends Monstre implements Combattant{
     }
     
 /**
-     * Méthode combatre du loup
-     *
+     * Méthode combattre du loup.
+     * Le loup ne peut combattre que au coprs à corps.
      * @param c Cible de l'attaque
      */
     public void combattre(Creature c) {

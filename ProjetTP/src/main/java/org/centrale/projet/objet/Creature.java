@@ -56,7 +56,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     
     
     /**
-     * Constructeur servant dans la création  d'un Joueur et d'un Monstre
+        * Constructeur aléatoire.
      * @param pos
      * @param vivant 
      */
@@ -145,7 +145,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
      */    
     public void deplacer(World monde,int x, int y) throws DeplacementIncorrectException{
         
-        if(x>1 || x<-1 || y>1 || y<-1 || pos.getX()-x==0 || pos.getX()+x==monde.getLargeur() || pos.getY()-y==0 || pos.getY()+y==monde.getHauteur()){
+        if(x>1 || x<-1 || y>1 || y<-1 || pos.getX()+x<0 || pos.getX()+x>monde.getLargeur() || pos.getY()+y<0 || pos.getY()+y>monde.getHauteur()){
             throw new DeplacementIncorrectException("Déplacement non valide");
         }
         else{  
@@ -154,12 +154,19 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
         
     }
         
+    /**
+     * Affiche les informations concernant la créature.
+     */
     public void affiche(){
         System.out.println("La créature a " + this.ptVie+ " points de vie et se situe en " + this.pos + ".");
         System.out.println("La créature a un pourcentage d'attaque de "+ this.pourcentageAtt +"%.");
         System.out.println("La créature a "+ this.degAtt +" points d'attaque.");
     }
     
+    /**
+     * Affiche un résumé des informations de la créature pour tenir sur une ligne.
+     * @return Les informations
+     */
     @Override
     public String toString(){
         
