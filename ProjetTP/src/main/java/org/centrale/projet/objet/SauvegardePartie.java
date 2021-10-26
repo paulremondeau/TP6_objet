@@ -7,7 +7,6 @@ package org.centrale.projet.objet;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
@@ -174,6 +173,7 @@ public class SauvegardePartie {
                 fichier.write(p.getDegMag() + " ");
                 fichier.write(p.getDistAttMax() + " ");
                 fichier.write(p.getPtPar() + " ");
+                fichier.write("0 ");  // Nombre de flèches nul
                 fichier.write(p.getPos().getX() + " ");
                 fichier.write(p.getPos().getY() + " ");
                 fichier.newLine();
@@ -209,6 +209,7 @@ public class SauvegardePartie {
                 fichier.write(p.getDegMag() + " ");
                 fichier.write(p.getDistAttMax() + " ");
                 fichier.write(p.getPtPar() + " ");
+                fichier.write("0 ");
                 fichier.write(p.getPos().getX() + " ");
                 fichier.write(p.getPos().getY() + " ");
                 fichier.newLine();
@@ -226,6 +227,7 @@ public class SauvegardePartie {
                 fichier.write(p.getDegMag() + " ");
                 fichier.write(p.getDistAttMax() + " ");
                 fichier.write(p.getPtPar() + " ");
+                fichier.write("0 ");
                 fichier.write(p.getPos().getX() + " ");
                 fichier.write(p.getPos().getY() + " ");
                 fichier.newLine();

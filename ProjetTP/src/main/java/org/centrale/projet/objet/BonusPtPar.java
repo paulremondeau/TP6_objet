@@ -13,6 +13,7 @@ public class BonusPtPar extends Nourriture{
     
     /**
      * Constructeur de la nourriture.
+     * @param pos Position de la nourriture.
      * @param puissance Valeur du bonus pour les points de parades.
      * @param duree Durée du bonus.
      */

@@ -106,7 +106,7 @@ public class Archer extends Personnage implements Combattant {
         if (this.getPos().distance(c.getPos()) > 1 && this.getPos().distance(c.getPos()) <= this.getDistAttMax() && this.getNbFleches() >= 1) {
             Random generateurAleatoire = new Random();
             int jetArcher = generateurAleatoire.nextInt(100);
-            this.setNbFleches(this.getNbFleches() - 1); // On retire un point de mana
+            this.setNbFleches(this.getNbFleches() - 1); // On retire une flèche
             if (jetArcher <= this.getPourcentageAtt()) {
                 c.setPtVie(c.getPtVie() - this.getDegAtt());
                 System.out.println("L'attaque a réussi ! " + c.getClass().getSimpleName() + " a subi " + this.getDegAtt() + " points de dégats.");

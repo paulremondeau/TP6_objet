@@ -42,7 +42,7 @@ public class Paysan extends Personnage {
         this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(10,30));
         this.setDegAtt(ThreadLocalRandom.current().nextInt(1,5));
         this.setDegMag(ThreadLocalRandom.current().nextInt(1,5));
-        this.setDistAttMax(ThreadLocalRandom.current().nextInt(3,6));
+        this.setDistAttMax(1);
         this.setPtPar(ThreadLocalRandom.current().nextInt(20,30));    
     }
         

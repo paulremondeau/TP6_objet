@@ -80,16 +80,21 @@ public class Mage extends Personnage implements Combattant{
 
         if (this.getPos().distance(c.getPos()) >= 1 && this.getPos().distance(c.getPos()) <= this.getDistAttMax() && this.getPtMana() >= 1) { // Si la cible est au cac et qu'on a au moins un point de mana
             Random generateurAleatoire = new Random();
-            int jetArcher = generateurAleatoire.nextInt(100);
+            int jetMage = generateurAleatoire.nextInt(100);
             this.setPtMana(this.getPtMana() - 1); // On retire un point de mana
-            if (jetArcher <= this.getPourcentageMag()) {
+            if (jetMage <= this.getPourcentageMag()) {
                     c.setPtVie(c.getPtVie() - this.getDegMag());
+                    System.out.println("L'attaque a réussi ! " + c.getClass().getSimpleName() + " a subi " + this.getDegAtt() + " points de dégats.");
                 }
             else {
                 System.out.println("L'attaque a échoué...");
             }
         } else {
-            System.out.println("La cible n'est pas à portée !");
+            if (this.getPtMana() < 1) {
+                System.out.println("Pas assez de mana !");
+            } else {
+                System.out.println("La cible n'est pas à portée !");
+            }
         }
         
         if (c.getPtVie()<0){

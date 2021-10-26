@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * La classe du nuage toxique
  * @author remondeau
  */
-public class NuageToxique extends Objet implements Deplacable, Combattant {
+public final class NuageToxique extends Objet implements Deplacable, Combattant {
 
     private int pourcentageAtt;
     private int pourcentagePar;
@@ -115,8 +115,10 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
     }
     /**
      * Déplacement du nuage
-     * @param x
-     * @param y 
+     * @param monde Monde dans lequel il se déplace
+     * @param x Déplacement selon x
+     * @param y Déplacement selon y
+     * @throws org.centrale.projet.objet.DeplacementIncorrectException
      */
     @Override
     public void deplacer(World monde,int x, int y) throws DeplacementIncorrectException{
@@ -133,6 +135,7 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
     /**
      * Affichage des informations concernant le nuage toxique.
      */
+    @Override
     public void affiche(){
         super.affiche();
         System.out.println("Le nuage toxique a un pourcentage d'attaque de "+ this.pourcentageAtt +"%.");

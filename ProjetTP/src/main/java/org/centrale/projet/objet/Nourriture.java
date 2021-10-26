@@ -16,7 +16,8 @@ public abstract class Nourriture extends Objet {
     
     /**
      * 
-     * @param carac la caractéristique qui sera modifiée
+     * @param pos Position de la nourriture.
+     * @param duree Duree de l'effet de la nourriture.
      * @param puissance la valeur du bonus/valus que procure la nourriture
      */
     public Nourriture(Point2D pos,int puissance,int duree) {
@@ -30,6 +31,7 @@ public abstract class Nourriture extends Objet {
      * Lorsqu'un nourriture est utilisée, elle est ajouté à la liste de nourritures du personnage.
      * @param p Personnage cible
      */
+    @Override
     public void utiliser(Personnage p){
         p.getListeNourriture().add(this);
     }

@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import static java.lang.String.valueOf;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -89,19 +88,31 @@ public class World {
 
                 System.out.println("\nC'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + " avec une portée de " + perso.getDistAttMax() + " et " + perso.getPtVie() + " ptVie. Liste des creatures : ");
                 visualiserPlateau(joueur);
-                System.out.println("Que voulez-vous faire ? Combattre/Deplacer/Rien");
                 String action;
-
-                do {
+                if (perso instanceof Combattant){
+                    System.out.println("Que voulez-vous faire ? Combattre/Deplacer/Rien");
                     action = keyboard.nextLine();
-                } while (!action.equals("Combattre") && !action.equals("Deplacer") && !action.equals("Rien"));
+                    while (!action.equals("Combattre") && !action.equals("Deplacer") && !action.equals("Rien")){
+                        System.out.println("Veuillez entrer une action valide.");
+                        action = keyboard.nextLine();
+                    }
+                }
+                else{
+                    System.out.println("Que voulez-vous faire ? Deplacer/Rien");
+                    action = keyboard.nextLine();
+                    while (!action.equals("Deplacer") && !action.equals("Rien")){
+                    System.out.println("Veuillez entrer une action valide.");
+                    action = keyboard.nextLine();
+                }
+                }
 
                 switch (action) {
 
                     case "Combattre":
                         System.out.println("\nIndiquez le numero de la cible à attaquer.");
                         int numeroCible = keyboard.nextInt();
-                        while (numeroCible < 1 && numeroCible > nCreatures) {
+                        while (numeroCible < 1 || numeroCible > nCreatures) {
+                            System.out.println("Indiquer un numero de cible >=1 et <= au nombre de créatures.");
                             numeroCible = keyboard.nextInt();
                         }
                         numeroCible -= 1;
@@ -154,7 +165,7 @@ public class World {
 
                     Personnage perso = joueur.getPerso();
 
-                    // Les combatants peuvent joueur, les Lapin ne feront rien
+                    // Les combattants peuvent jouer, les Lapin ne feront rien
                     if (c.getPos().distance(perso.getPos()) == 1) {
                         System.out.println("    -" + c.getClass().getSimpleName() + " vous attaque !!");
                         ((Combattant) c).combattre(joueur.getPerso());
@@ -214,7 +225,7 @@ public class World {
                 System.out.println("Choisissez le nom de votre fichier. Veuillez finir par .txt !");
                 path = keyboard.nextLine();
                 file = new File(path);
-                while (file.isFile() && (path.substring(path.length() - 4, path.length()) != ".txt")) {
+                while (file.isFile() && (!".txt".equals(path.substring(path.length() - 4, path.length())))) {
 
                     System.out.println("Attention le fichier existe déjà ! Voulez-vous changer le nom du fichier à enregistrer ? y/n");
                     do {
@@ -253,21 +264,15 @@ public class World {
     }
 
     /**
-     * Génère un monde aléatoirement. Ce monde contient un archer du nom de
-     * Robin, un paysan du nom de Peon et deux lapins. Ces quatres éléments ne
-     * peuvent pas se trouver à plus de cinq unités les uns des autres.
+     * Génère un monde aléatoirement.
+     * @param nJoueurs Nombre de joueurs dans le monde aléatoire.
      */
     public void creeMondeAlea(int nJoueurs) {
         System.out.println("\nGénération d'un monde aléatoire...\nMonde aléatoire généré !");
         Loup unLoup;
 
         Point2D pos;
-        int pV;
-        int pA;
-        int pP;
-        int dA;
-        int ptPara;
-        int longueurListe = ThreadLocalRandom.current().nextInt(2, 4);
+        int longueurListe = ThreadLocalRandom.current().nextInt(2, 6);
         for (int i = 0; i < longueurListe; i++) { // Ajout de loups
             pos = creerPoint2DAlea();
             unLoup = new Loup(pos);
@@ -283,6 +288,7 @@ public class World {
         }
 
         Mana popomana;
+        longueurListe = ThreadLocalRandom.current().nextInt(2, 4);
         for (int i = 0; i < longueurListe; i++) { // Ajout des potions de mana
             pos = creerPoint2DAlea();
             popomana = new Mana(pos, ThreadLocalRandom.current().nextInt(10, 15));
@@ -290,6 +296,7 @@ public class World {
         }
 
         NuageToxique nuage;
+        longueurListe = ThreadLocalRandom.current().nextInt(2, 4);
         for (int i = 0; i < longueurListe; i++) { // Ajout des nuages toxiques
             pos = creerPoint2DAlea();
             nuage = new NuageToxique(pos);
@@ -328,7 +335,6 @@ public class World {
     /**
      * Crée un joueur aléatoirement dans le monde.
      *
-     * @return Donne le joueur qui a été créé.
      */
     public void creeJoueurAlea() {
         Point2D pos = creerPoint2DAlea();
@@ -349,7 +355,6 @@ public class World {
         boolean estOccupee;
 
         do {
-            estOccupee = false;
             x = generateurAleatoire.nextInt(this.largeur);
             y = generateurAleatoire.nextInt(this.hauteur);
             pos = new Point2D(x, y);
@@ -391,7 +396,7 @@ public class World {
     public void visualiserPlateau(Joueur j) {
 
         System.out.println("Liste des créatures :");
-        visualiserPlateauCrature(j);
+        visualiserPlateauCreature(j);
 
         System.out.println("Liste des objets :");
         visualiserPlateauObjets(j);
@@ -413,7 +418,7 @@ public class World {
      *
      * @param j Joueur par rapport auquel on affiche les distances.
      */
-    public void visualiserPlateauCrature(Joueur j) {
+    public void visualiserPlateauCreature(Joueur j) {
         int i = 1;
         for (Creature c : listeCreatures) {
             System.out.println("    - " + i + ": " + c + " et à une distance de " + j.getPerso().getPos().distance(c.getPos()) + ".");

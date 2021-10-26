@@ -1,0 +1,18 @@
+Largeur 15
+Hauteur 15
+Loup 5 1 0 0 2 11 12 1 
+Loup 5 2 0 0 2 10 5 5 
+Loup 8 2 0 0 2 13 2 12 
+Soin 11 3 10
+Soin 13 0 13
+Soin 11 2 9
+Mana 10 4 3
+Mana 14 8 9
+Mana 12 4 9
+NuageToxique 79 69 68 66 2 0 
+NuageToxique 74 68 68 63 6 0 
+NuageToxique 73 66 65 65 4 5 
+BonusPtPar 10 3 2 12 
+MalusDegAtt 10 3 5 3 
+Joueur Guerrier FUSRODA 88 0 73 64 0 69 61 0 0 69 0 9 3 
+Joueur Archer Snipeeeeeeee 45 0 83 29 18 30 21 1 5 27 26 12 7 

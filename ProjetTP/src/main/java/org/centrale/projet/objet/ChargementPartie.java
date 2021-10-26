@@ -36,8 +36,6 @@ public class ChargementPartie {
     /**
      * Méthode pour charger un monde depuis la source.
      * @return Le monde qui a été créé.
-     * @throws FileNotFoundException Le fichier n'existe pas.
-     * @throws IOException Erreur de lecture.
      */
     public World chargerPartie(){
         try{
@@ -135,7 +133,7 @@ public class ChargementPartie {
             case "BonusPtPar" -> {
                 int puissance = Integer.parseInt(ligneListe.get(1));
                 int duree = Integer.parseInt(ligneListe.get(2));
-                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(5)), Integer.parseInt(ligneListe.get(6)));  
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(3)), Integer.parseInt(ligneListe.get(4)));  
                 BonusPtPar unBonusPtPar = new BonusPtPar(pos,puissance,duree);
                 monde.getListeObjets().add(unBonusPtPar);
                 break;
@@ -143,7 +141,7 @@ public class ChargementPartie {
             case "MalusDegAtt" -> {
                 int puissance = Integer.parseInt(ligneListe.get(1));
                 int duree = Integer.parseInt(ligneListe.get(2));
-                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(5)), Integer.parseInt(ligneListe.get(6)));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(3)), Integer.parseInt(ligneListe.get(4)));
                 MalusDegAtt unMalusDegAtt = new MalusDegAtt(pos,puissance,duree);
                 monde.getListeObjets().add(unMalusDegAtt);
                 break;
