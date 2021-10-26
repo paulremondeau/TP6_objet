@@ -86,7 +86,7 @@ public class World {
             try {
                 Personnage perso = joueur.getPerso();
 
-                System.out.println("\nC'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + " avec une portée de " + perso.getDistAttMax() + " et " + perso.getPtVie() + " ptVie. Liste des creatures : ");
+                System.out.println("\nC'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + " avec une portée de " + perso.getDistAttMax() + " et " + perso.getPtVie() + " ptVie.");
                 visualiserPlateau(joueur);
                 String action;
                 if (perso instanceof Combattant){
@@ -268,7 +268,7 @@ public class World {
      * @param nJoueurs Nombre de joueurs dans le monde aléatoire.
      */
     public void creeMondeAlea(int nJoueurs) {
-        System.out.println("\nGénération d'un monde aléatoire...\nMonde aléatoire généré !");
+        System.out.println("\nGénération d'un monde aléatoire...");
         Loup unLoup;
 
         Point2D pos;
@@ -312,6 +312,8 @@ public class World {
         listeObjets.add(bonusPtPar);
         listeObjets.add(malusDegAtt);
 
+        System.out.println("Monde aléatoire généré !");
+        
         System.out.println("\nBienvenue dans l'interface de création des personnages.");
         if (nJoueurs == 1) {
             System.out.println("Création de votre personnage.");
@@ -400,6 +402,11 @@ public class World {
 
         System.out.println("Liste des objets :");
         visualiserPlateauObjets(j);
+        
+        if (listeJoueurs.size()>1){
+            System.out.println("Liste des joueurs :");
+            visualiserPlateauJoueurs(j);
+        }
     }
 
     /**
@@ -426,6 +433,21 @@ public class World {
         }
     }
 
+    
+    /**
+     * Affiche de manière lisible la liste des autres joueurs du monde.
+     * @param j Joueurs qui n'est pas affiché, dont c'est le tour.
+     */
+    public void visualiserPlateauJoueurs(Joueur j) {
+        for (Joueur jou : listeJoueurs) {
+            if (!jou.equals(j)){
+                Personnage perso=jou.getPerso();
+                System.out.println("    - "+ perso);
+            }
+        }
+    }
+    
+    
     public int getLargeur() {
         return largeur;
     }

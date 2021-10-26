@@ -56,9 +56,8 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     
     
     /**
-        * Constructeur aléatoire.
-     * @param pos
-     * @param vivant 
+     * Constructeur aléatoire.
+     * @param pos Position de la créature créée. 
      */
     public Creature(Point2D pos){
         this.pos = pos;
@@ -136,13 +135,15 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     
     
     /**
-     * Déplace le monstre sur une des cases adjacentes en utilisant +1, 0 ou -1 dans x et y. Il est possible d'avoir un déplacement nul
+     * Déplace le monstre sur une des cases adjacentes en utilisant +1, 0 ou -1 dans x et y. Il est possible d'avoir un déplacement nul.
+     * Si on essaye de donner des valeurs supérieures à 1 ou inférieures à -1 on affiche un message d'erreur.
      * 
-     * Si on essaye de donner des valeurs supérieures à 1 ou inférieures à -1 on affiche un message d'erreur
-     * 
+     * @param monde Le monde où le déplacement est effectué
      * @param x le déplacement voulu selon l'axe X
      * @param y le déplacement voulu selon l'axe Y
+     * @throws org.centrale.projet.objet.DeplacementIncorrectException
      */    
+    @Override
     public void deplacer(World monde,int x, int y) throws DeplacementIncorrectException{
         
         if(x>1 || x<-1 || y>1 || y<-1 || pos.getX()+x<0 || pos.getX()+x>monde.getLargeur() || pos.getY()+y<0 || pos.getY()+y>monde.getHauteur()){

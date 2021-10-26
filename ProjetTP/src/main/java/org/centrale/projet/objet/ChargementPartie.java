@@ -165,7 +165,7 @@ public class ChargementPartie {
                 int rM = Integer.parseInt(ligneListe.get(7));
                 int dA = Integer.parseInt(ligneListe.get(8));
                 int ptPara = Integer.parseInt(ligneListe.get(11));
-                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
                  
                 Guerrier unGuerrier = new Guerrier(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
                 monde.getListeCreatures().add(unGuerrier);
@@ -183,7 +183,7 @@ public class ChargementPartie {
                 int dM = Integer.parseInt(ligneListe.get(9));
                 int distMax = Integer.parseInt(ligneListe.get(10));
                 int ptPara = Integer.parseInt(ligneListe.get(11));
-                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
                  
                 Mage unmage = new Mage(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara, true);
                 monde.getListeCreatures().add(unmage);
@@ -197,7 +197,7 @@ public class ChargementPartie {
                 int rM = Integer.parseInt(ligneListe.get(7));
                 int dA = Integer.parseInt(ligneListe.get(8));
                 int ptPara = Integer.parseInt(ligneListe.get(11));
-                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
                  
                 Voleur unVoleur = new Voleur(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
                 monde.getListeCreatures().add(unVoleur);
@@ -224,7 +224,7 @@ public class ChargementPartie {
                 int pP = Integer.parseInt(ligneListe.get(5));
                 int distMax = Integer.parseInt(ligneListe.get(10));
                 int ptPara = Integer.parseInt(ligneListe.get(11));
-                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(12)), Integer.parseInt(ligneListe.get(13)));
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
                  
                 Paysan unPaysan = new Paysan(nom, pV, pP, distMax, pos, ptPara, true);
                 monde.getListeCreatures().add(unPaysan);

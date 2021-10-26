@@ -154,4 +154,17 @@ public abstract class Personnage extends Creature{
         System.out.println(this.nom+" a "+this.pourcentageResistMag + "% de résistance magique." );
     }
     
+     /**
+     * Affiche un résumé des informations de la créature pour tenir sur une ligne.
+     * @return Les informations
+     */
+    @Override
+    public String toString(){
+        
+        String res = "";
+        res += "Le "+this.getClass().getSimpleName() + " " + this.getNom() + " est à la position " + this.getPos().toString() + " avec "+ this.getPtVie()+" ptVie";
+        
+        return res;
+    }
+    
 }
