@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author bodet
  */
-public class Archer extends Personnage implements Combattant {
+public final class Archer extends Personnage implements Combattant {
     // Hérite de la classe Personnage
 
     private int nbFleches;

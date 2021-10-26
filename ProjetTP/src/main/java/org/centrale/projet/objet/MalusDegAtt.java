@@ -9,10 +9,11 @@ package org.centrale.projet.objet;
  * Classe de nourriture procurant un malus de dégats d'attaque.
  * @author remondeau
  */
-public class MalusDegAtt extends Nourriture{
+public final class MalusDegAtt extends Nourriture{
     
     /**
      * Constructeur de la nourriture.
+     * @param pos Position de la nourriture.
      * @param puissance Valeur du malus pour les degat d'attaque.
      * @param duree Durée du malus.
      */
@@ -27,7 +28,7 @@ public class MalusDegAtt extends Nourriture{
     @Override
     public void utiliser(Personnage p){
         super.utiliser(p);
-        p.setPtPar(p.getDegAtt()-this.getPuissance());
+        p.setDegAtt(p.getDegAtt()-this.getPuissance());
     }
 
     /**
@@ -36,7 +37,7 @@ public class MalusDegAtt extends Nourriture{
      */
     @Override
     public void fin(Personnage p) {
-        p.setPtPar(p.getDegAtt()+this.getPuissance());
+        p.setDegAtt(p.getDegAtt()+this.getPuissance());
     }
 
 

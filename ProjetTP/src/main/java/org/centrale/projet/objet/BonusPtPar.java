@@ -9,7 +9,7 @@ package org.centrale.projet.objet;
  * Classe de nourriture procurant un bonus de point de parade.
  * @author remondeau
  */
-public class BonusPtPar extends Nourriture{ 
+public final class BonusPtPar extends Nourriture{ 
     
     /**
      * Constructeur de la nourriture.

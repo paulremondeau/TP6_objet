@@ -15,7 +15,7 @@ public abstract class Nourriture extends Objet {
     private int duree;
     
     /**
-     * 
+     * Constructeur de nourriture.
      * @param pos Position de la nourriture.
      * @param duree Duree de l'effet de la nourriture.
      * @param puissance la valeur du bonus/valus que procure la nourriture
@@ -38,7 +38,7 @@ public abstract class Nourriture extends Objet {
     
     /**
      * Méthode abstraite de fin d'une nourriture.
-     * Lorsque la durée atteint 0, il faudra retirer les effets de la nourriture et la retiré de la liste des nourritures du personnage.
+     * Lorsque la durée atteint 0, il faudra retirer les effets de la nourriture et la retirer de la liste des nourritures du personnage.
      * @param p Personnage cible
      */
     public abstract void fin(Personnage p);

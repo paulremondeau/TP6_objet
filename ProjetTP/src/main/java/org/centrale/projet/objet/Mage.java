@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * La classe des mages.
  * @author remondeau
  */
-public class Mage extends Personnage implements Combattant{
+public final class Mage extends Personnage implements Combattant{
 
     /**
      * Constructeur qui prend les attributs en paramètres.
@@ -84,7 +84,7 @@ public class Mage extends Personnage implements Combattant{
             this.setPtMana(this.getPtMana() - 1); // On retire un point de mana
             if (jetMage <= this.getPourcentageMag()) {
                     c.setPtVie(c.getPtVie() - this.getDegMag());
-                    System.out.println("L'attaque a réussi ! " + c.getClass().getSimpleName() + " a subi " + this.getDegAtt() + " points de dégats.");
+                    System.out.println("L'attaque a réussi ! " + c.getClass().getSimpleName() + " a subi " + this.getDegMag() + " points de dégats.");
                 }
             else {
                 System.out.println("L'attaque a échoué...");

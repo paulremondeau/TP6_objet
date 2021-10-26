@@ -1,10 +1,10 @@
 Largeur 25
 Hauteur 25
-Guerrier grosBill 250 0 80 60 0 10 15 0 1 5 0 8 3
-Mage merlin 50 50 20 25 85 80 2 20 7 2 0 15 22
-Voleur arsene 75 0 60 80 0 25 15 0 1 5 0 5 7
-Archer robin 75 0 50 60 0 25 10 0 10 5 15 20 11
-Paysan peon 25 0 0 30 0 0 1 0 1 5 0 3 6
+Guerrier grosBill 250 0 80 60 0 10 15 0 1 5 0 8 3 0
+Mage merlin 50 50 20 25 85 80 2 20 7 2 0 15 22 0
+Voleur arsene 75 0 60 80 0 25 15 0 1 5 0 5 7 0
+Archer robin 75 0 50 60 0 25 10 0 10 5 15 20 11 0
+Paysan peon 25 0 0 30 0 0 1 0 1 5 0 3 6 0
 Loup 30 50 50 25 5 19 3
 Lapin 4000 90 1 1000 1 10 10
 Loup 80 75 30 45 5 2 13
@@ -17,4 +17,5 @@ Soin 100 4 20
 Mana 100 7 1
 Soin 48 1 19
 Mana 24 0 0
-Joueur Guerrier bob 150 0 90 50 0 10 20 0 1 5 0 12 12
+Joueur Guerrier bob 150 0 90 50 0 10 20 0 1 5 0 12 12 3 MalusDegAtt 20 1 MalusDegAtt 10 3 MalusDegAtt 10 3
+Joueur Mage merlin 29 73 0 14 84 76 0 64 13 23 0 9 7 1 BonusPtPar 10 4

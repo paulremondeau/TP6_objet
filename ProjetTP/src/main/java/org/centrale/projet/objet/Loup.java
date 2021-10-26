@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * La classe des louups
  * @author remondeau
  */
-public class Loup extends Monstre implements Combattant{
+public final class Loup extends Monstre implements Combattant{
 
     /**
      * Constructeur ayant tous les attributs en paramètres.
@@ -38,10 +38,10 @@ public class Loup extends Monstre implements Combattant{
     
     public Loup(Point2D pos){
         super(pos);
-        this.setPtVie(ThreadLocalRandom.current().nextInt(5, 10));
-        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(1, 5));
-        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(0, 1));
-        this.setDegAtt(ThreadLocalRandom.current().nextInt(1, 3));
+        this.setPtVie(ThreadLocalRandom.current().nextInt(50, 100));
+        this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(30, 70));
+        this.setPourcentagePar(ThreadLocalRandom.current().nextInt(10, 20));
+        this.setDegAtt(ThreadLocalRandom.current().nextInt(10, 30));
         this.setPtPar(ThreadLocalRandom.current().nextInt(5, 15));
     }
 
@@ -56,6 +56,7 @@ public class Loup extends Monstre implements Combattant{
      * Le loup ne peut combattre que au coprs à corps.
      * @param c Cible de l'attaque
      */
+    @Override
     public void combattre(Creature c) {
 
         if (this.getPos().distance(c.getPos()) == 1) { // Si la cible est au cac et qu'on a au moins un point de mana
@@ -64,14 +65,14 @@ public class Loup extends Monstre implements Combattant{
             if (jetLoup <= this.getPourcentageAtt()) {
                 
                 int jetCreature = generateurAleatoire.nextInt(100);
-                if (jetCreature<=c.getPtPar()){ // Si la créature pare le coup
-                    System.out.println("La cible a paré le coup !");
+                if (jetCreature<=c.getPourcentagePar()){ // Si la créature pare le coup
                     int degat;
                     degat = Math.max(0,this.getDegAtt()-c.getPtPar());
                     c.setPtVie(c.getPtVie()-degat);
+                    System.out.println("La cible a paré le coup ! " +c.getClass().getSimpleName() + " a subi " + degat + " points de dégats.");
                 }
                 else{
-                    System.out.println("La cible a pris un coup direct !");
+                    System.out.println("La cible a pris un coup direct ! "+ c.getClass().getSimpleName() + " a subi " + this.getDegAtt() + " points de dégats.");
                     c.setPtVie(c.getPtVie() - this.getDegAtt());
                 }
                 

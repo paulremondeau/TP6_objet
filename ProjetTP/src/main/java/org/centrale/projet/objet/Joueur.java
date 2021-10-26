@@ -35,9 +35,9 @@ public class Joueur {
         
         Scanner keyboard = new Scanner(System.in);
         do{
-            System.out.println("Veuillez choisir entre Guerrier, Mage, Archer et Paysan.");
+            System.out.println("Veuillez choisir entre Guerrier, Mage, Archer, Voleur et Paysan.");
             classe= keyboard.nextLine();
-        }while (!classe.equals("Mage") && !classe.equals("Guerrier")  && !classe.equals("Archer")  && !classe.equals("Paysan") );
+        }while (!classe.equals("Mage") && !classe.equals("Guerrier")  && !classe.equals("Archer")  && !classe.equals("Voleur") && !classe.equals("Paysan")  );
         
         System.out.println("\nFormidable ! Comment s'appelera votre personnage ?");
         String nom = keyboard.nextLine();
@@ -58,6 +58,9 @@ public class Joueur {
                 break;
             case "Mage": 
                 perso = new Mage(nom,pos,vivant);
+                break;
+            case "Voleur":
+                perso= new Voleur(nom,pos,vivant);
                 break;
             default:
                 

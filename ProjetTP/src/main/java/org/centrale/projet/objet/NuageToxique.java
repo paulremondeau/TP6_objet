@@ -28,7 +28,7 @@ public final class NuageToxique extends Objet implements Deplacable, Combattant 
 
         this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(70,80));
         this.setPourcentagePar(ThreadLocalRandom.current().nextInt(60,70));
-        this.setDegAtt(ThreadLocalRandom.current().nextInt(60,70));
+        this.setDegAtt(ThreadLocalRandom.current().nextInt(20,30));
         this.setPtPar(ThreadLocalRandom.current().nextInt(60,70));    
     }
     /**
@@ -85,20 +85,20 @@ public final class NuageToxique extends Objet implements Deplacable, Combattant 
      */
     @Override
     public void combattre(Creature c) {
-        if (this.getPos().distance(c.getPos()) == 1) { // Si la cible est au cac et qu'on a au moins un point de mana
+        if (this.getPos().distance(c.getPos()) <= 1 && this.getPos().distance(c.getPos()) >= 0) { // Si la cible est au cac
             Random generateurAleatoire = new Random();
             int jet = generateurAleatoire.nextInt(100);
             if (jet <= this.getPourcentageAtt()) {
                 
                 int jetCreature = generateurAleatoire.nextInt(100);
-                if (jetCreature<=c.getPtPar()){ // Si la créature pare le coup
-                    System.out.println("La cible a paré le coup !");
+                if (jetCreature<=c.getPourcentagePar()){ // Si la créature pare le coup
                     int degat;
                     degat = Math.max(0,this.getDegAtt()-c.getPtPar());
                     c.setPtVie(c.getPtVie()-degat);
+                    System.out.println("La cible a paré le coup !" + c.getClass().getSimpleName() + " a subi " + degat + " points de dégats.");
                 }
                 else{
-                    System.out.println("La cible a pris un coup direct !");
+                    System.out.println("La cible a pris un coup direct !"+ c.getClass().getSimpleName() + " a subi " + this.getDegAtt() + " points de dégats.");
                     c.setPtVie(c.getPtVie() - this.getDegAtt());
                 }
                 
@@ -140,6 +140,16 @@ public final class NuageToxique extends Objet implements Deplacable, Combattant 
         super.affiche();
         System.out.println("Le nuage toxique a un pourcentage d'attaque de "+ this.pourcentageAtt +"%.");
         System.out.println("La nuage toxique a "+ this.degAtt +" points d'attaque et "+this.ptPar+" points de parade.");
+    }
+    
+    /**
+     * Le nuage combat le personnage quand celui-ci se déplace dessus.
+     * @param p 
+     */
+    @Override
+    public void utiliser(Personnage p){
+        System.out.println("Attention, déplacement sur un nuage toxique!");
+        this.combattre(p);
     }
     
 }

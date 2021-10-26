@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Classe des voleurs, sous-classe des personnages.
  * @author bodet
  */
-public class Voleur extends Personnage implements Combattant {
+public final class Voleur extends Personnage implements Combattant {
 
     /**
      * Constructeur qui prend les attributs en paramètres.
@@ -55,11 +55,12 @@ public class Voleur extends Personnage implements Combattant {
     public Voleur(String nom,Point2D pos, boolean vivant){
         super(nom,pos);
     
-        this.setPtVie(ThreadLocalRandom.current().nextInt(80,100));
+        this.setPtVie(ThreadLocalRandom.current().nextInt(20,30));
         this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(50,70));
         this.setPourcentagePar(ThreadLocalRandom.current().nextInt(70,90));
         this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(20,30));
-        this.setDegAtt(ThreadLocalRandom.current().nextInt(10,20));
+        this.setDistAttMax(1);
+        this.setDegAtt(ThreadLocalRandom.current().nextInt(80,100));
         this.setPtPar(ThreadLocalRandom.current().nextInt(2,7));    
     }
 
@@ -78,13 +79,13 @@ public class Voleur extends Personnage implements Combattant {
                 
                 int jetCreature = generateurAleatoire.nextInt(100);
                 if (jetCreature<=c.getPtPar()){ // Si la créature pare le coup
-                    System.out.println("La cible a paré le coup !");
                     int degat;
                     degat = Math.max(0,this.getDegAtt()-c.getPtPar());
                     c.setPtVie(c.getPtVie()-degat);
+                    System.out.println("La cible a paré le coup !"+ c.getClass().getSimpleName() + " a subi " + degat + " points de dégats.");
                 }
                 else{
-                    System.out.println("La cible a pris un coup direct !");
+                    System.out.println("La cible a pris un coup direct !"+ c.getClass().getSimpleName() + " a subi " + this.getDegAtt() + " points de dégats.");
                     c.setPtVie(c.getPtVie() - this.getDegAtt());
                 }
                 

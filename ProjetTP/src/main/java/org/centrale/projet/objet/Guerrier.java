@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author bodet
  */
-public class Guerrier extends Personnage implements Combattant{
+public final class Guerrier extends Personnage implements Combattant{
 
     /**
      * Constructeur qui prend les attributs en paramètres.
@@ -60,6 +60,7 @@ public class Guerrier extends Personnage implements Combattant{
         this.setPourcentageAtt(ThreadLocalRandom.current().nextInt(70,80));
         this.setPourcentagePar(ThreadLocalRandom.current().nextInt(60,70));
         this.setPourcentageResistMag(ThreadLocalRandom.current().nextInt(60,70));
+        this.setDistAttMax(1);
         this.setDegAtt(ThreadLocalRandom.current().nextInt(60,70));
         this.setPtPar(ThreadLocalRandom.current().nextInt(60,70));    
     }
@@ -79,14 +80,14 @@ public class Guerrier extends Personnage implements Combattant{
             if (jetGuerrier <= this.getPourcentageAtt()) {
                 
                 int jetCreature = generateurAleatoire.nextInt(100);
-                if (jetCreature<=c.getPtPar()){ // Si la créature pare le coup
-                    System.out.println("La cible a paré le coup !");
+                if (jetCreature<=c.getPourcentagePar()){ // Si la créature pare le coup
                     int degat;
                     degat = Math.max(0,this.getDegAtt()-c.getPtPar());
                     c.setPtVie(c.getPtVie()-degat);
+                    System.out.println("La cible a paré le coup !" + c.getClass().getSimpleName() + " a subi " + degat + " points de dégats.");
                 }
                 else{
-                    System.out.println("La cible a pris un coup direct !");
+                    System.out.println("La cible a pris un coup direct !"+ c.getClass().getSimpleName() + " a subi " + this.getDegAtt() + " points de dégats.");
                     c.setPtVie(c.getPtVie() - this.getDegAtt());
                 }
                 

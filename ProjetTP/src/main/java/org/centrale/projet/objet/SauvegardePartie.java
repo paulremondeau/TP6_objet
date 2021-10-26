@@ -62,7 +62,6 @@ public class SauvegardePartie {
                             fichier.write(((Monstre) p).getPtVie() + " ");
                             fichier.write(((Monstre) p).getPourcentageAtt() + " ");
                             fichier.write(((Monstre) p).getPourcentagePar() + " ");
-                            fichier.write(((Monstre) p).getPourcentagePar() + " ");
                             fichier.write(((Monstre) p).getDegAtt() + " ");
                             fichier.write(((Monstre) p).getPtPar() + " ");
                             fichier.write(((Monstre) p).getPos().getX() + " ");
@@ -74,7 +73,6 @@ public class SauvegardePartie {
                             this.fichier.write("Lapin ");
                             fichier.write(((Monstre) p).getPtVie() + " ");
                             fichier.write(((Monstre) p).getPourcentageAtt() + " ");
-                            fichier.write(((Monstre) p).getPourcentagePar() + " ");
                             fichier.write(((Monstre) p).getPourcentagePar() + " ");
                             fichier.write(((Monstre) p).getDegAtt() + " ");
                             fichier.write(((Monstre) p).getPtPar() + " ");
@@ -160,79 +158,32 @@ public class SauvegardePartie {
      * @throws IOException
      */
     public void enregistrerPersonnage(Personnage p) throws IOException {
-        switch (p.getClass().getSimpleName()) {
-            case "Guerrier" -> {
-                this.fichier.write("Guerrier " + p.getNom() + " ");
-                fichier.write(p.getPtVie() + " ");
-                fichier.write(p.getPtMana() + " ");
-                fichier.write(p.getPourcentageAtt() + " ");
-                fichier.write(p.getPourcentagePar() + " ");
-                fichier.write(p.getPourcentageMag() + " ");
-                fichier.write(p.getPourcentageResistMag() + " ");
-                fichier.write(p.getDegAtt() + " ");
-                fichier.write(p.getDegMag() + " ");
-                fichier.write(p.getDistAttMax() + " ");
-                fichier.write(p.getPtPar() + " ");
-                fichier.write("0 ");  // Nombre de flèches nul
-                fichier.write(p.getPos().getX() + " ");
-                fichier.write(p.getPos().getY() + " ");
-                fichier.newLine();
-                break;
-            }
-            case "Archer" -> {
-                this.fichier.write("Archer " + p.getNom() + " ");
-                fichier.write(p.getPtVie() + " ");
-                fichier.write(p.getPtMana() + " ");
-                fichier.write(p.getPourcentageAtt() + " ");
-                fichier.write(p.getPourcentagePar() + " ");
-                fichier.write(p.getPourcentageMag() + " ");
-                fichier.write(p.getPourcentageResistMag() + " ");
-                fichier.write(p.getDegAtt() + " ");
-                fichier.write(p.getDegMag() + " ");
-                fichier.write(p.getDistAttMax() + " ");
-                fichier.write(p.getPtPar() + " ");
-                fichier.write(((Archer) p).getNbFleches() + " ");
-                fichier.write(p.getPos().getX() + " ");
-                fichier.write(p.getPos().getY() + " ");
-                fichier.newLine();
-                break;
-            }
-            case "Mage" -> {
-                this.fichier.write("Mage " + p.getNom() + " ");
-                fichier.write(p.getPtVie() + " ");
-                fichier.write(p.getPtMana() + " ");
-                fichier.write(p.getPourcentageAtt() + " ");
-                fichier.write(p.getPourcentagePar() + " ");
-                fichier.write(p.getPourcentageMag() + " ");
-                fichier.write(p.getPourcentageResistMag() + " ");
-                fichier.write(p.getDegAtt() + " ");
-                fichier.write(p.getDegMag() + " ");
-                fichier.write(p.getDistAttMax() + " ");
-                fichier.write(p.getPtPar() + " ");
-                fichier.write("0 ");
-                fichier.write(p.getPos().getX() + " ");
-                fichier.write(p.getPos().getY() + " ");
-                fichier.newLine();
-                break;
-            }
-            case "Paysan" -> {
-                this.fichier.write("Paysan " + p.getNom() + " ");
-                fichier.write(p.getPtVie() + " ");
-                fichier.write(p.getPtMana() + " ");
-                fichier.write(p.getPourcentageAtt() + " ");
-                fichier.write(p.getPourcentagePar() + " ");
-                fichier.write(p.getPourcentageMag() + " ");
-                fichier.write(p.getPourcentageResistMag() + " ");
-                fichier.write(p.getDegAtt() + " ");
-                fichier.write(p.getDegMag() + " ");
-                fichier.write(p.getDistAttMax() + " ");
-                fichier.write(p.getPtPar() + " ");
-                fichier.write("0 ");
-                fichier.write(p.getPos().getX() + " ");
-                fichier.write(p.getPos().getY() + " ");
-                fichier.newLine();
-                break;
-            }
+        fichier.write(p.getClass().getSimpleName()+ " " + p.getNom() + " ");
+        fichier.write(p.getPtVie() + " ");
+        fichier.write(p.getPtMana() + " ");
+        fichier.write(p.getPourcentageAtt() + " ");
+        fichier.write(p.getPourcentagePar() + " ");
+        fichier.write(p.getPourcentageMag() + " ");
+        fichier.write(p.getPourcentageResistMag() + " ");
+        fichier.write(p.getDegAtt() + " ");
+        fichier.write(p.getDegMag() + " ");
+        fichier.write(p.getDistAttMax() + " ");
+        fichier.write(p.getPtPar() + " ");
+        if (p.getClass().getSimpleName().equals("Archer")){
+            fichier.write(((Archer) p).getNbFleches() + " ");
         }
+        else{
+            fichier.write("0 ");  // Nombre de flèches nul   
+        }
+        fichier.write(p.getPos().getX() + " ");
+        fichier.write(p.getPos().getY() + " ");
+        System.out.println("Taille de l'inventaire de nourriture :"+p.getListeNourriture().size());
+        fichier.write(p.getListeNourriture().size()+" ");
+        for (Nourriture nourriture : p.getListeNourriture()){
+            fichier.write(nourriture.getClass().getSimpleName()+ " ");
+            fichier.write(nourriture.getPuissance()+" ");
+            fichier.write(nourriture.getDuree()+" ");
+        }
+        fichier.newLine();
     }
 }

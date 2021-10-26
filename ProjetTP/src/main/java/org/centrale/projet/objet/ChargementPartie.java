@@ -166,8 +166,10 @@ public class ChargementPartie {
                 int dA = Integer.parseInt(ligneListe.get(8));
                 int ptPara = Integer.parseInt(ligneListe.get(11));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
-                 
                 Guerrier unGuerrier = new Guerrier(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
+                int nbNourriture = Integer.parseInt(ligneListe.get(15));                
+                ArrayList<Nourriture> listeNourriture=litListeNourriture(nbNourriture, 16, ligneListe);
+                unGuerrier.setListeNourriture(listeNourriture);
                 monde.getListeCreatures().add(unGuerrier);
                 break;
             }
@@ -184,9 +186,11 @@ public class ChargementPartie {
                 int distMax = Integer.parseInt(ligneListe.get(10));
                 int ptPara = Integer.parseInt(ligneListe.get(11));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
-                 
-                Mage unmage = new Mage(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara, true);
-                monde.getListeCreatures().add(unmage);
+                Mage unMage = new Mage(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara, true);
+                int nbNourriture = Integer.parseInt(ligneListe.get(15));                
+                ArrayList<Nourriture> listeNourriture=litListeNourriture(nbNourriture, 16, ligneListe);
+                unMage.setListeNourriture(listeNourriture); 
+                monde.getListeCreatures().add(unMage);
                 break;
             }
             case "Voleur" -> {
@@ -197,9 +201,11 @@ public class ChargementPartie {
                 int rM = Integer.parseInt(ligneListe.get(7));
                 int dA = Integer.parseInt(ligneListe.get(8));
                 int ptPara = Integer.parseInt(ligneListe.get(11));
-                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
-                 
+                Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14))); 
                 Voleur unVoleur = new Voleur(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
+                int nbNourriture = Integer.parseInt(ligneListe.get(15));                
+                ArrayList<Nourriture> listeNourriture=litListeNourriture(nbNourriture, 16, ligneListe);
+                unVoleur.setListeNourriture(listeNourriture); 
                 monde.getListeCreatures().add(unVoleur);
             }
             case "Archer" -> {
@@ -213,8 +219,10 @@ public class ChargementPartie {
                 int ptPara = Integer.parseInt(ligneListe.get(11));
                 int nbF = Integer.parseInt(ligneListe.get(12));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
-                
                 Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, nbF, ptPara, true);  
+                int nbNourriture = Integer.parseInt(ligneListe.get(15));                
+                ArrayList<Nourriture> listeNourriture=litListeNourriture(nbNourriture, 16, ligneListe);
+                unArcher.setListeNourriture(listeNourriture); 
                 monde.getListeCreatures().add(unArcher);
                 break;
             }
@@ -227,6 +235,9 @@ public class ChargementPartie {
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(13)), Integer.parseInt(ligneListe.get(14)));
                  
                 Paysan unPaysan = new Paysan(nom, pV, pP, distMax, pos, ptPara, true);
+                int nbNourriture = Integer.parseInt(ligneListe.get(15));                
+                ArrayList<Nourriture> listeNourriture=litListeNourriture(nbNourriture, 16, ligneListe);
+                unPaysan.setListeNourriture(listeNourriture); 
                 monde.getListeCreatures().add(unPaysan);
             }
             case "Joueur" -> {
@@ -243,32 +254,39 @@ public class ChargementPartie {
                 int ptPara = Integer.parseInt(ligneListe.get(12));
                 int nbF = Integer.parseInt(ligneListe.get(13));
                 Point2D pos = new Point2D(Integer.parseInt(ligneListe.get(14)), Integer.parseInt(ligneListe.get(15)));
+                int nbNourriture = Integer.parseInt(ligneListe.get(16));                
+                ArrayList<Nourriture> listeNourriture=litListeNourriture(nbNourriture, 17, ligneListe);
                 Joueur leJoueur = null;
                 
                 // Switch sur la classe du personnage du joueur
                 switch(ligneListe.get(1)){
                     case "Guerrier" -> {
                         Guerrier unGuerrier = new Guerrier(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
+                        unGuerrier.setListeNourriture(listeNourriture); 
                         leJoueur = new Joueur(unGuerrier);
                         break;
                     }
                     case "Mage" -> {
                         Mage unMage = new Mage(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, pos, ptPara, true);
+                        unMage.setListeNourriture(listeNourriture); 
                         leJoueur = new Joueur(unMage);
                         break;
                     }
                     case "Voleur" -> {
                         Voleur unVoleur = new Voleur(nom, pV, pA, pP, rM, dA, pos, ptPara, true);
+                        unVoleur.setListeNourriture(listeNourriture); 
                         leJoueur = new Joueur(unVoleur);
                         break;
                     }
                     case "Archer" -> {
                         Archer unArcher = new Archer(nom, pV, pA, pP, rM, dA, distMax, pos, nbF, ptPara, true);
+                        unArcher.setListeNourriture(listeNourriture); 
                         leJoueur = new Joueur(unArcher);
                         break;
                     }
                     case "Paysan" -> {
                         Paysan unPaysan = new Paysan(nom, pV, pP, distMax, pos, ptPara, true);
+                        unPaysan.setListeNourriture(listeNourriture); 
                         leJoueur = new Joueur(unPaysan);
                         break;
                     }
@@ -295,6 +313,26 @@ public class ChargementPartie {
             liste.add(mot);
         }
         return liste;
+    }
+    
+    public ArrayList<Nourriture> litListeNourriture(int nbNourriture, int start, ArrayList<String> ligneListeLecture){
+        ArrayList<Nourriture> listeNourriture=new ArrayList<>();
+        
+        for (int i=start;i<start+3*nbNourriture;i=i+3){
+            int puissance = Integer.parseInt(ligneListeLecture.get(i+1));
+            int duree = Integer.parseInt(ligneListeLecture.get(i+2));
+            switch(ligneListeLecture.get(i)){
+                case "MalusDegAtt" -> {
+                    MalusDegAtt malusDegAtt = new MalusDegAtt(null, puissance, duree);
+                    listeNourriture.add(malusDegAtt);
+                }
+                case "BonusPtPar" -> {
+                    BonusPtPar bonusPtPar = new BonusPtPar(null, puissance, duree);
+                    listeNourriture.add(bonusPtPar);
+                }
+            }
+        }
+        return listeNourriture;
     }
     
 }

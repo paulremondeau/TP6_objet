@@ -132,9 +132,12 @@ public abstract class Personnage extends Creature{
     }
 
     public ArrayList<Nourriture> getListeNourriture() {
-        return listeNourriture;
+        return this.listeNourriture;
     }
 
+    public void setListeNourriture(ArrayList<Nourriture> listeNourriture) {
+        this.listeNourriture = listeNourriture;
+    }
     
     /**
      * Affiche les différentes informations du personnage.

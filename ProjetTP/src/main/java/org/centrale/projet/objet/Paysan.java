@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Classe des paysans. Sous-classe des personnages.
  * @author bodet
  */
-public class Paysan extends Personnage {
+public final class Paysan extends Personnage {
     /**
      * Constuit un paysan en lui donnant ses attributs en paramètres.
      * @param nom Nom du paysan.

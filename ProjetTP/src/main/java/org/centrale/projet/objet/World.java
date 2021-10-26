@@ -71,12 +71,10 @@ public class World {
             Personnage perso = joueur.getPerso();
             for (Nourriture nourriture : perso.getListeNourriture()) {
                 int duree = nourriture.getDuree();
-
-                if (duree < 0) {
-                    nourriture.fin(perso);
-                } else {
-                    nourriture.setDuree(nourriture.getDuree() - 1);
+                if (duree <= 0) {
+                    nourriture.fin(perso); 
                 }
+                nourriture.setDuree(nourriture.getDuree() - 1);
             }
             perso.getListeNourriture().removeIf(n -> n.getDuree() < 0); // retire toutes les nourritures dont la durée est écoulée
         }
@@ -85,7 +83,8 @@ public class World {
             int nCreatures = listeCreatures.size();
             try {
                 Personnage perso = joueur.getPerso();
-
+                perso.affiche();
+                System.out.println(perso.getListeNourriture().size());
                 System.out.println("\nC'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + " avec une portée de " + perso.getDistAttMax() + " et " + perso.getPtVie() + " ptVie.");
                 visualiserPlateau(joueur);
                 String action;
@@ -101,9 +100,9 @@ public class World {
                     System.out.println("Que voulez-vous faire ? Deplacer/Rien");
                     action = keyboard.nextLine();
                     while (!action.equals("Deplacer") && !action.equals("Rien")){
-                    System.out.println("Veuillez entrer une action valide.");
-                    action = keyboard.nextLine();
-                }
+                        System.out.println("Veuillez entrer une action valide.");
+                        action = keyboard.nextLine();
+                    }
                 }
 
                 switch (action) {
@@ -115,6 +114,7 @@ public class World {
                             System.out.println("Indiquer un numero de cible >=1 et <= au nombre de créatures.");
                             numeroCible = keyboard.nextInt();
                         }
+                        keyboard.nextLine(); // Pour consommer le /n après le nextInt()
                         numeroCible -= 1;
                         Creature cible = this.listeCreatures.get(numeroCible);
                         if (perso instanceof Combattant) {
@@ -128,21 +128,47 @@ public class World {
                         int dx;
                         int dy;
                         Point2D destination = new Point2D(perso.getPos());
-                        do {
-                            System.out.println("x ?");
-                            dx = keyboard.nextInt();
-                            System.out.println("y ?");
-                            dy = keyboard.nextInt();
-                            destination.setPosition(destination.getX() + dx, destination.getY() + dy);
-                        } while (!estLibre(destination));
+                        System.out.println("x ?");
+                        dx = keyboard.nextInt();
+                        System.out.println("y ?");
+                        dy = keyboard.nextInt();
+                        keyboard.nextLine(); // Pour consommer le /n après le nextInt()
+                        destination.setPosition(destination.getX() + dx, destination.getY() + dy);
+                        
+                        while (!estLibre(destination)){
+                            destination = new Point2D(perso.getPos());
+                            System.out.println("La destination est occupée. Ne rien faire ou réessayer. Rien/Deplacer");
+                            action = keyboard.nextLine();
+                            while (!action.equals("Deplacer") && !action.equals("Rien")){
+                                System.out.println("Veuillez entrer une action valide.");
+                                action = keyboard.nextLine();
+                            }
+                            if (action.equals("Deplacer")){
+                                System.out.println("x ?");
+                                dx = keyboard.nextInt();
+                                System.out.println("y ?");
+                                dy = keyboard.nextInt();
+                                keyboard.nextLine(); // Pour consommer le /n après le nextInt()
+                                destination.setPosition(destination.getX() + dx, destination.getY() + dy);
+                            }
+                            else{
+                                System.out.println("\nVous passez votre tour.");
+                                break;
+                            }
+                            
+                        }
 
-                        ((Creature) perso).deplacer(this, dx, dy); // Utilisation des objets
-                        for (Objet o : this.listeObjets) {
-                            if (o.getPos().equals(perso.getPos())) {
-                                o.utiliser(perso);
-                                o.setUsed(true);
+                        if (action.equals("Deplacer")){
+                            ((Creature) perso).deplacer(this, dx, dy);
+                            // Utilisation des objets
+                            for (Objet o : this.listeObjets) {
+                                if (o.getPos().equals(perso.getPos())) {
+                                    o.utiliser(perso);
+                                    o.setUsed(true);
+                                }
                             }
                         }
+                        
                         break;
 
                     case "Rien":
@@ -158,43 +184,60 @@ public class World {
         Point2D nextPos = new Point2D();
 
         for (Creature c : this.listeCreatures) {
-
             if (c instanceof Combattant) {
-
+                Personnage proche= listeJoueurs.get(0).getPerso();
+                Personnage perso;
                 for (Joueur joueur : this.listeJoueurs) {
-
-                    Personnage perso = joueur.getPerso();
-
-                    // Les combattants peuvent jouer, les Lapin ne feront rien
-                    if (c.getPos().distance(perso.getPos()) == 1) {
-                        System.out.println("    -" + c.getClass().getSimpleName() + " vous attaque !!");
-                        ((Combattant) c).combattre(joueur.getPerso());
-                    } else {
-                        outer:
-                        for (int x = -1; x < 2; x++) {
-                            for (int y = -1; y < 2; y++) {
-                                nextPos.setPosition(c.getPos().getX() + x, y + c.getPos().getY());
-                                if (nextPos.distance(perso.getPos()) < c.getPos().distance(perso.getPos())) {
-                                    if (estLibre(nextPos)) {
-                                        try {
-                                            c.deplacer(this, x, y);
-                                            System.out.println("    -" + c.getClass().getSimpleName() + " se déplace vers vous");
-                                            break outer;
-                                        } catch (DeplacementIncorrectException ex) {
-                                            //System.out.println("Erreur soulevée.");
-                                        }
+                    perso = joueur.getPerso();
+                    if (perso.getPos().distance(c.getPos()) < proche.getPos().distance(c.getPos())){
+                        proche = perso;
+                    }
+                }
+                // Les combattants peuvent jouer, les Lapin ne feront rien
+                if (c.getPos().distance(proche.getPos()) == 1) {
+                    System.out.println("    -" + c.getClass().getSimpleName() + " vous attaque !!");
+                    ((Combattant) c).combattre(proche);
+                } else {
+                    outer:
+                    for (int x = -1; x < 2; x++) {
+                        for (int y = -1; y < 2; y++) {
+                            nextPos.setPosition(c.getPos().getX() + x, y + c.getPos().getY());
+                            if (nextPos.distance(proche.getPos()) < c.getPos().distance(proche.getPos())) {
+                                if (estLibre(nextPos)) {
+                                    try {
+                                        c.deplacer(this, x, y);
+                                        System.out.println("    -" + c.getClass().getSimpleName() + " se déplace vers vous");
+                                        break outer;
+                                    } catch (DeplacementIncorrectException ex) {
+                                        //System.out.println("Erreur soulevée.");
                                     }
-
                                 }
                             }
                         }
                     }
-
                 }
             }
-
         }
 
+        for (Objet o : this.listeObjets){
+            if (o instanceof Combattant){
+                for (Joueur joueur : this.listeJoueurs) {
+                    Personnage perso = joueur.getPerso();
+                    if (o.getPos().distance(perso.getPos()) == 1 || o.getPos().equals(perso.getPos())){
+                        System.out.println("    -" + o.getClass().getSimpleName() + " vous attaque !!");
+                        ((Combattant) o).combattre(joueur.getPerso());
+                    }
+                }
+                for (Creature c : this.listeCreatures){
+                    if (o.getPos().distance(c.getPos()) == 1 || o.getPos().equals(c.getPos())){
+                        System.out.println("    -" + o.getClass().getSimpleName() + " attaque "+c.getClass().getSimpleName()+" !!");
+                        ((Combattant) o).combattre(c);
+                    }
+                }
+                this.listeCreatures.removeIf(n -> n.isVivant() == false);
+            }
+        }
+        
         this.listeObjets.removeIf(n -> n.isUsed() == true); // On retire les objets qui ont été utilisé.
         System.out.println("Fin du tour de jeu !");
         if (listeCreatures.isEmpty()) {
