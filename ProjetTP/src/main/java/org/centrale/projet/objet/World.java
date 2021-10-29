@@ -83,8 +83,6 @@ public class World {
             int nCreatures = listeCreatures.size();
             try {
                 Personnage perso = joueur.getPerso();
-                perso.affiche();
-                System.out.println(perso.getListeNourriture().size());
                 System.out.println("\nC'est votre tour " + perso.getNom() + " !\nVous êtes en " + perso.getPos() + " avec une portée de " + perso.getDistAttMax() + " et " + perso.getPtVie() + " ptVie.");
                 visualiserPlateau(joueur);
                 String action;
@@ -197,7 +195,13 @@ public class World {
                 if (c.getPos().distance(proche.getPos()) == 1) {
                     System.out.println("    -" + c.getClass().getSimpleName() + " vous attaque !!");
                     ((Combattant) c).combattre(proche);
-                } else {
+                } 
+                // Si le personnage a une distance d'attaque supérieure à 1, il peut attaquer à distance
+                else if (c instanceof Personnage && proche.getPos().distance(c.getPos())<=((Personnage) c).getDistAttMax()){
+                    System.out.println("    -" + c.getClass().getSimpleName() + " vous attaque !!");
+                    ((Combattant) c).combattre(proche);
+                }
+                else {
                     outer:
                     for (int x = -1; x < 2; x++) {
                         for (int y = -1; y < 2; y++) {

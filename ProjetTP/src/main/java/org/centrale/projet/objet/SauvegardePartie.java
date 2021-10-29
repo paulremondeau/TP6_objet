@@ -116,6 +116,7 @@ public class SauvegardePartie {
                         fichier.write(((Nourriture) o).getPos().getX() + " ");
                         fichier.write(((Nourriture) o).getPos().getY() + " ");
                         fichier.newLine();
+                        break;
                     }
                     case "MalusDegAtt" -> {
                         this.fichier.write("MalusDegAtt ");
@@ -124,6 +125,7 @@ public class SauvegardePartie {
                         fichier.write(((Nourriture) o).getPos().getX() + " ");
                         fichier.write(((Nourriture) o).getPos().getY() + " ");
                         fichier.newLine();
+                        break;
                     }
                 }
             }
